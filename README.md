@@ -1,1 +1,1 @@
-Projeto integrador UNIVESP de um software com framework web para seleção de professores e pesquisadores da UNICAMP.
+Projeto integrador UNIVESP de software com framework web para seleção de professores e pesquisadores da UNICAMP.
