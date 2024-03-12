@@ -1,0 +1,19 @@
+Examinador:
+    codExaminador
+    nome
+
+Candidato:
+    codCandidato
+    codInscricao
+    nome
+
+Prova:
+    codProva
+    nota
+    examinador
+    candidato
+    codConcurso
+    data
+    peso
+    descricao
+    
