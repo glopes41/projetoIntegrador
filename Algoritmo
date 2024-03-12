@@ -1,0 +1,36 @@
+Leia nome dos membros da comissão avaliadora
+Leia nome dos candidatos 
+PROVA_ELIMINATORIA <- Prova escrita tem carater eliminatorio?
+PROVA_ESPECIFICA_ELIMINATORIA <- Prova especifica tem carater eliminatorio?
+Se PROVA_ELIMINATORIA == NAO:
+	Exibe mensagem: "Não use esse site para fazer a classificação!"
+Senao:
+	Leia os pesos das provas****
+	Leia as notas da prova escrita
+	Repita para cada candidato incrito:
+		Se (numero de notas 7) >= 3:
+			Candidato aprovado na prova escrita
+			Se PROVA_ESPECIFICA_ELIMINATORIA == SIM:
+				Repita para cada candidato aprovado:
+					Se (numero de notas 7) >= 3:
+						Candidato aprovado na prova especifica.(Habilitado)
+						nota_final = (PE*E+PT*T+PA*A+PD*D+PES*ES)/(PE+PT+PA+PD+PES)
+						Ordenar notas decrescente por examinador
+						Repita para cada examinador:
+							Verifica se há candidatos empatados
+							Se SIM:
+								Pergunta qual a preferencia do examinador
+								Reordena a lista
+							Senao:
+								Continua
+						Fim do Repita
+						
+					Senao:
+						Candidato reprovado na prova especifica.(Eliminado)
+				Fim do Repita
+			Senao:
+				Leia as notas das demais provas
+		Senao:
+			Candidato reprovado na prova escrita.
+	Fim do Repita
+	
