@@ -1,5 +1,48 @@
-Leia nome dos membros da comissão avaliadora
-Leia nome dos candidatos 
+## TELA 1
+
+Escreva: "Digite os nomes dos membros da Comissão Julgadora" e exiba a tabela de 2 colunas e 5 linhas, conforme imagem
+Leia nome dos membros da comissão julgadora
+Faça Examinador1 = nome do primeiro examinador digitado
+Faça Examinador2 = nome do segundo examinador digitado
+Faça Examinador3 = nome do terceiro examinador digitado
+Faça Examinador4 = nome do quarto examinador digitado
+Faça Examinador5 = nome do quinto examinador digitado
+Armezene os nomes TABELA EXAMINADORES
+
+
+
+## TELA 2 
+
+Escreva: "Digite os nomes dos candidatos que realizaram todas as provas" e exiba a tabela de 1 coluna e 20 linhas, conforme imagem
+Leia nome dos candidatos
+Faça num_candidatos = número de candidatos preenchidos
+Armezene os nomes TABELA CANDIDATOS
+
+
+
+## TELA 3 
+
+	## TELA 3 - FASE 1 
+
+Escreva: "Selecione o número de provas que houve no Concurso" e uma caixa de seleção com opções de 1 a 7, conforme imagem
+Leia o número de provas
+Faça num_provas = número de provas
+
+	## TELA 3 - FASE 2 
+
+Escreva: "Digite o nome e o peso de cada prova" e exiba logo abaixo uma tabela com num_provas+1 linhas e duas colunas, com títulos "Nome da prova" e "Peso", conforme imagem
+Armezene os nomes de provas e seus pesoas na TABELA PROVAS
+
+
+
+## TELA 4
+
+Exiba num_provas tabelas, cada uma com num_candidatos+1 linhas e 6 colunas
+Em cada tabela
+	faça o texto da célula
+		(1,1) = "Candidatos"
+
+
 PROVA_ELIMINATORIA <- Prova escrita tem carater eliminatorio?
 PROVA_ESPECIFICA_ELIMINATORIA <- Prova especifica tem carater eliminatorio?
 Se PROVA_ELIMINATORIA == NAO:

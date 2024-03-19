@@ -1,11 +1,16 @@
-Examinador:
+Examinador: (tamanho = 5 registros)
     codExaminador
     nome
 
-Candidato:
-    codCandidato
-    codInscricao
+Candidato: (tamanho variável)
+    codCandidato 
+    codInscricao # creio que basta o nome do candidato
     nome
+    STRING aprovado # campo de string "sim" ou "não", nulo a princípio, para aplicação posterior de filtro
+    STRING habilitado # campo de string "sim" ou "não", nulo a princípio, para aplicação posterior de filtro
+    ### neste procedimento de concurso, há uma diferença entre "aprovado" nas provas eliminatórias iniciais (o não aprovado nem prossegue para as demais provas) 
+    e "habilitado" após o cálculo das notas finais (nota final mínima "7" de ao menos 3 examinadores) ###
+
 
 Prova:
     codProva
