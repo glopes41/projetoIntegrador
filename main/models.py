@@ -8,7 +8,7 @@ class Tipo(models.Model):
 class Prova(models.Model):
     idProva = models.AutoField(primary_key=True)
     idConcurso = models.BigIntegerField()
-    tipo = models.ForeignKey(Tipo, related_name='idTipo', null=False, on_delete=models.PROTECT)
+    numTipo = models.ForeignKey(Tipo, related_name='tipos', null=False, on_delete=models.PROTECT)
 
 class Examinador(models.Model):
     idExaminador = models.AutoField(primary_key=True)
@@ -21,8 +21,9 @@ class Candidato(models.Model):
     habilitado = models.BooleanField()
 
 class Avaliacao(models.Model):
+    idAvaliacao = models.AutoField(primary_key=True)
     nota = models.DecimalField(max_digits=4, decimal_places=2)
     data = models.DateField()
-    idProva = models.ForeignKey(Prova, related_name='idProva', null=False, on_delete=models.PROTECT)
-    idCandidato = models.ForeignKey(Candidato, related_name='idCandidato', null=False, on_delete=models.PROTECT)
-    idAvaliacao = models.ManyToManyField(Examinador, blank=False)
+    prova = models.ForeignKey(Prova, related_name='provas', null=False, on_delete=models.PROTECT)
+    numCandidato = models.ForeignKey(Candidato, related_name='candidatos', null=False, on_delete=models.PROTECT)
+    numAvaliacao = models.ManyToManyField(Examinador, blank=False)

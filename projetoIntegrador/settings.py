@@ -126,14 +126,10 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static" )
+]
 
-os.path.join(BASE_DIR, STATIC_URL),
-
-)
-
-TEMPLATE_DIRS = (
-
-os.path.join(BASE_DIR, '/templates/'),
-
-)
+TEMPLATE_DIRS = [
+os.path.join(BASE_DIR, "templates")
+]

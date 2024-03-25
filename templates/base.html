@@ -1,0 +1,33 @@
+{% load static %}
+
+<!doctype html>
+
+<html>
+
+<head>
+
+<!-- tags meta obrigatórias -->
+
+<meta charset=”utf-8”>
+
+<meta name=”viewport” content=”width=device-width, initial-scale=1, shrink-to-fit=no”>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+<title> Projeto Integrador </title>
+
+</head>
+
+<body>
+
+{% include 'snippets/barraNavegacao.html' %}
+
+{% block conteudo %}
+
+{% endblock conteudo %}
+
+{% include 'snippets/rodape.html' %}
+
+</body>
+
+</html>
