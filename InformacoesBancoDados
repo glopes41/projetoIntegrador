@@ -4,7 +4,6 @@ Examinador: (tamanho = 5 registros)
 
 Candidato: (tamanho variável)
     codCandidato 
-    codInscricao # creio que basta o nome do candidato
     nome
     STRING aprovado # campo de string "sim" ou "não", nulo a princípio, para aplicação posterior de filtro
     STRING habilitado # campo de string "sim" ou "não", nulo a princípio, para aplicação posterior de filtro
@@ -21,4 +20,5 @@ Prova:
     data
     peso
     descricao
+    tipoProva
     
