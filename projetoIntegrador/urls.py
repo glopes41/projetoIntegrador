@@ -18,10 +18,10 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
-from main import views
+from main.views import CadastroCandidatosCreate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
-    path('cadastro-candidato', views.ViewCadastroCandidatos.as_view(), name='cadastro_candidato'),
+    path('candidato-form', CadastroCandidatosCreate.as_view(template_name='candidato_form.html'), name='candidato_form'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

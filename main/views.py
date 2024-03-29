@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from django.views.generic.edit import FormView
-from main import forms
+from django.views.generic import ListView, CreateView
+from .models import Candidato
 
-class ViewCadastroCandidatos(FormView):
-    template_name = "cadastroCandidatos.html"
-    form_class = forms.FormCandidato
-    success_url = "/"
+class CadastroCandidatosList(ListView):
+    model = Candidato
+
+class CadastroCandidatosCreate(CreateView):
+    model = Candidato
+    fields = ["nome"]
