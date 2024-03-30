@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+{% if candidato_list %}
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nome</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for n in candidato_list %}
+                <tr>
+                    <th scope="row">{{ n.pk }}</th>
+                    <td>{{ n.nome }}</td>
+                    <td>
+                        <button class="btn btn-danger">Alterar</button>
+                        <button class="btn btn-danger">Excluir</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <h2>Não há candidatos cadastrados.</h2>
+{% endif %}
+
+{% endblock conteudo %}
