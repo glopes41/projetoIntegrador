@@ -1,63 +1,86 @@
-## TELA 1
+### Para nosso software, precisamos de 3 informações: 1) os examinadores, 2) os candidatos e 3) quantas e quais foram as provas. Tendo
+essas três informações, basta que obter as notas e fazer os cálculos de nota final e de classificação ###
+
+
+## TELA 1 ## obtém os nomes dos examinadores
 
 Escreva: "Digite os nomes dos membros da Comissão Julgadora" e exiba a tabela de 2 colunas e 5 linhas, conforme imagem
 Leia nome dos membros da comissão julgadora
-Faça Examinador1 = nome do primeiro examinador digitado
-Faça Examinador2 = nome do segundo examinador digitado
-Faça Examinador3 = nome do terceiro examinador digitado
-Faça Examinador4 = nome do quarto examinador digitado
-Faça Examinador5 = nome do quinto examinador digitado
-Armezene os nomes TABELA EXAMINADORES
+Faça examinador1 = nome do primeiro examinador digitado
+Faça examinador2 = nome do segundo examinador digitado
+Faça examinador3 = nome do terceiro examinador digitado
+Faça examinador4 = nome do quarto examinador digitado
+Faça examinador5 = nome do quinto examinador digitado
+Armezene os nomes na TABELA: EXAMINADORES
 
 
 
-## TELA 2 
+## TELA 2 ## obtém os nomes dos candidatos
 
 Escreva: "Digite os nomes dos candidatos que realizaram todas as provas" e exiba a tabela de 1 coluna e 20 linhas, conforme imagem
 Leia nome dos candidatos
+Enquanto forem inseridos candidatos:
+	para i = 1,2,3 etc. :
+		faça candidato_i = nome do i-ésimo candidato digitado
 Faça num_candidatos = número de candidatos preenchidos
-Armezene os nomes TABELA CANDIDATOS
+Armezene os nomes dos candidatos na TABELA: CANDIDATOS
 
 
 
-## TELA 3 
+## TELA 3 ## obtém quantas e quais são as provas
 
 	## TELA 3 - FASE 1 
 
 Escreva: "Selecione o número de provas que houve no Concurso" e uma caixa de seleção com opções de 1 a 7, conforme imagem
 Leia o número de provas
 Faça num_provas = número de provas
-
+Crie a TABELA PROVAS, com num_provas linhas e 3 colunas
+# a 1ª coluna é o número j do registro, com j =1,2,...,num_provas; a 2ª coluna é o nome da prova, e 3ª coluna é o peso da prova
 	## TELA 3 - FASE 2 
 
-Escreva: "Digite o nome e o peso de cada prova" e exiba logo abaixo uma tabela com num_provas+1 linhas e duas colunas, com títulos "Nome da prova" e "Peso", conforme imagem
-Armezene os nomes de provas e seus pesoas na TABELA PROVAS
+Escreva: "Digite o nome e o peso de cada prova" e exiba abaixo uma tabela com num_provas+1 linhas (por causa do título) e duas colunas, 
+sendo a primeira linha preenchida com os títulos "Nome da prova", na 1ª coluna, e "Peso", na 2ª coluna, conforme imagem
+Armezene a j-ésima linha de dados da tabela acima no registro j=1,2,...,num_provas da tabela PROVAS
+
+
+
 
 
 
 ## TELA 4
 
-Exiba num_provas tabelas, cada uma com num_candidatos+1 linhas e 6 colunas
+Exiba num_provas tabelas, cada uma com num_candidatos+2 linhas (por causa dos títulos) e 6 colunas
 Em cada tabela
+	mescle em uma só a primeira linha e escreva o nome associado ao registro j da TABELA PROVAS, com j = 1,2,...,num_provas
 	faça o texto da célula
-		(1,1) = "Candidatos"
+		(2,1) = "Candidatos"
+		(2,2) = examinador1
+		(2,3) = examinador2
+		(2,4) = examinador3
+		(2,5) = examinador4
+		(2,6) = examinador5
+		(3,1) = candidato1
+		...
+		(3,num_candidatos) = candidatoi, com i = num_candidatos
+		
+Leia as notas preenchidas e as armaneze em diferentes TABELAS, cada uma com o nome de uma prova
+
+### a partir de agora acabou a leitura de dados do usuário. Basta usar as notas inseridas para calcular as notas finais e a classificação,
+como se descreve abaixo ###
+
+Crie a tabela NOTAS_FINAIS com num_candidatos linhas e 5 coluna
+Defina nota_final = (Prova-1*peso-1+Prova-2*peso-2+...+Prova-num_provas*peso-num_provas)/(peso-1+peso-2+...+peso-num_provas)
+Para cada candidato:
+	para cada examinador:
+		repita para j=1,2,...,num_provas:
+			recupere a nota do examinador na prova correspondente à da linha j de PROVAS, nomemando-se a nota como "Prova-j"
+			recupere o peso da prova correspondente à da linha j de PROVAS, nomemando-se o peso como "peso-j"
+		aplique os dados recuperados em nota_final
+		armazene a nota final do examinador para o candidato no campo correspondente de NOTAS_FINAIS
 
 
-PROVA_ELIMINATORIA <- Prova escrita tem carater eliminatorio?
-PROVA_ESPECIFICA_ELIMINATORIA <- Prova especifica tem carater eliminatorio?
-Se PROVA_ELIMINATORIA == NAO:
-	Exibe mensagem: "Não use esse site para fazer a classificação!"
-Senao:
-	Leia os pesos das provas****
-	Leia as notas da prova escrita
-	Repita para cada candidato incrito:
-		Se (numero de notas 7) >= 3:
-			Candidato aprovado na prova escrita
-			Se PROVA_ESPECIFICA_ELIMINATORIA == SIM:
-				Repita para cada candidato aprovado:
-					Se (numero de notas 7) >= 3:
-						Candidato aprovado na prova especifica.(Habilitado)
-						nota_final = (PE*E+PT*T+PA*A+PD*D+PES*ES)/(PE+PT+PA+PD+PES)
+
+
 						Ordenar notas decrescente por examinador
 						Repita para cada examinador:
 							Verifica se há candidatos empatados
