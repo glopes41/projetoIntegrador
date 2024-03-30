@@ -1,30 +1,32 @@
 {% extends "base.html" %}
 
+{% block titulo %}
+    Lista de Candidatos
+{% endblock titulo%}
+
 {% block conteudo %}
-
-{% if candidato_list %}
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nome</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for n in candidato_list %}
+    {% if candidato_list %}
+        <table>
+            <thead>
                 <tr>
-                    <th scope="row">{{ n.pk }}</th>
-                    <td>{{ n.nome }}</td>
-                    <td>
-                        <button class="btn btn-danger">Alterar</button>
-                        <button class="btn btn-danger">Excluir</button>
-                    </td>
+                    <th>id</th>
+                    <th>nome</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <h2>Não há candidatos cadastrados.</h2>
-{% endif %}
-
+            </thead>
+            <tbody>
+                {% for n in candidato_list %}
+                    <tr>
+                        <th scope="row">{{ n.pk }}</th>
+                        <td>{{ n.nome }}</td>
+                        <td>
+                            <a href="{% url 'candidato_update' pk=n.pk %}"><button class="botao_confirmar">Alterar</button></a>
+                            <a href="{% url 'candidato_delete' pk=n.pk %}"><button class="botao_aviso">Excluir</button></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>Não há candidatos cadastrados.</h2>
+    {% endif %}
 {% endblock conteudo %}

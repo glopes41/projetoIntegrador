@@ -30,11 +30,40 @@ body{
 }
 
 /* Style the links inside the navigation bar */
-.topnav rodape{
-  float: left;
-  color: #f1aeae;
-  text-align: center;
+.rodape{
+  color: #000000;
+  text-align: left;
   padding: 14px 16px;
-  text-decoration: none;
   font-size: 12px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.botao_confirmar{
+  border-style: none;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #4f69dd;
+  text-align: center;
+  margin: 2px 2px;
+}
+
+.botao_confirmar:hover{
+  background-color: #4f69dd;
+  color: black;
+}
+
+.botao_aviso{
+  border: none;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #c55757;
+  text-align: center;
+  margin: 2px 2px;
+}
+
+.botao_aviso:hover{
+  background-color: #c55757;
+  color: black;
 }

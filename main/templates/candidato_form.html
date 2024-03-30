@@ -1,12 +1,23 @@
 {% extends "base.html" %}
 
+{% block titulo %}
+    {% if candidato.pk %}
+        Editar Candidato
+    {% else %}
+        Novo Candidato
+    {% endif %}
+{% endblock titulo %}
+
 {% block conteudo %}
+    {% if candidato.pk %}
+        <h2>Editar candidato.</h2>
+    {% else %}
+        <h2>Cadastrar novo candidato.</h2>
+    {% endif %}
 
-<h2>Cadastro Candidatos</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Enviar</button>
-</form>
-
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="botao_confirmar">Confirmar</button>
+    </form>
 {% endblock conteudo %}

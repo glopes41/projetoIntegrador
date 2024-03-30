@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Excluir Candidato
+{% endblock titulo %}
+
+{% block conteudo %}
+    <h2>Excluir Candidato?</h2>
+    <p>Tem certeza que deseja excluir o candidato <strong>{{ candidato.nome }}</strong>?</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Excluir</button>
+        <a href="{% url 'candidato_list' %}"><button>Cancelar</button></a>
+    </form>
+{% endblock conteudo %}
