@@ -45,8 +45,6 @@ Armezene a j-ésima linha de dados da tabela acima no registro j=1,2,...,num_pro
 
 
 
-
-
 ## TELA 4
 
 Exiba num_provas tabelas, cada uma com num_candidatos+2 linhas (por causa dos títulos) e 6 colunas
@@ -70,33 +68,112 @@ como se descreve abaixo ###
 
 Crie a tabela NOTAS_FINAIS com num_candidatos linhas e 5 coluna
 Defina nota_final = (Prova-1*peso-1+Prova-2*peso-2+...+Prova-num_provas*peso-num_provas)/(peso-1+peso-2+...+peso-num_provas)
-Para cada candidato:
-	para cada examinador:
+Repita para cada candidato:
+	repita para cada examinador:
 		repita para j=1,2,...,num_provas:
 			recupere a nota do examinador na prova correspondente à da linha j de PROVAS, nomemando-se a nota como "Prova-j"
 			recupere o peso da prova correspondente à da linha j de PROVAS, nomemando-se o peso como "peso-j"
+		fim do repita
 		aplique os dados recuperados em nota_final
 		armazene a nota final do examinador para o candidato no campo correspondente de NOTAS_FINAIS
+	fim do repita
+Se há ao menos 3 notas >= 7:
+	continua
+Senão:
+	exclua o candidato de NOTAS_FINAIS
+Faça num_candidatos = número de registros em NOTAS_FINAIS após as possíveis exclusões acima
+fim do repita
 
+Crie a TABELA: NOTAS_FINAIS_EXAMINADOR_1, com num_candidatos linhas e 1 coluna
+Crie a TABELA: NOTAS_FINAIS_EXAMINADOR_2, com num_candidatos linhas e 1 coluna
+Crie a TABELA: NOTAS_FINAIS_EXAMINADOR_3, com num_candidatos linhas e 1 coluna
+Crie a TABELA: NOTAS_FINAIS_EXAMINADOR_4, com num_candidatos linhas e 1 coluna
+Crie a TABELA: NOTAS_FINAIS_EXAMINADOR_5, com num_candidatos linhas e 1 coluna
 
+Repita para cada examinador j = 1,2,3,4,5:
+	copie as notas do examinador para cada candidato de NOTAS_FINAIS para NOTAS_FINAIS_EXAMINADOR_j
+	ordene pela ordem decrescente das notas
+	verifique se há candidatos empatados, ou seja, notas finais iguais
+	Se SIM:
+		Pergunte: "Qual a preferencia do examinador?"
+		Reordena a lista
+	Senao:
+		Continua
+Crie a TABELA CLASSIFICAÇÃO_FINAL com num_candidatos linhas e 3 colunas: posição, candidato, indicações
 
+Substitua a nota pelo nome do candidato, mantendo a mesma ordenação, em NOTAS_FINAIS_EXAMINADOR_1, ..., NOTAS_FINAIS_EXAMINADOR_5
 
-						Ordenar notas decrescente por examinador
-						Repita para cada examinador:
-							Verifica se há candidatos empatados
-							Se SIM:
-								Pergunta qual a preferencia do examinador
-								Reordena a lista
-							Senao:
-								Continua
-						Fim do Repita
-						
-					Senao:
-						Candidato reprovado na prova especifica.(Eliminado)
-				Fim do Repita
-			Senao:
-				Leia as notas das demais provas
-		Senao:
-			Candidato reprovado na prova escrita.
-	Fim do Repita
+### Agora vamos calcular a classificação final ###
+
+Repita j = 1, 2, ..., num_candidatos vezes:
+	conte quantas vezes aparece cada nome na posição mais alta das tabelas NOTAS_FINAIS_EXAMINADOR_1, ..., NOTAS_FINAIS_EXAMINADOR_5
+	### isto acima é n° de indicações
+	se algum nome teve indicações >= 3:
+		preencha a coluna "posição" de CLASSIFICAÇÃO_FINAL com "j"
+		preencha a coluna "candidato" de CLASSIFICAÇÃO_FINAL com o nome que teve indicações >= 3
+		preencha a coluna "indicações" de CLASSIFICAÇÃO_FINAL com o total de indicações do nome que teve indicações >= 3
+		exclua este nome das tabelas NOTAS_FINAIS_EXAMINADOR_1, ..., NOTAS_FINAIS_EXAMINADOR_5
+		reorganize as tabelas acima com a mesma ordem, mas agora sem o candidato já classificado
+	senão:
+		continua
+	se dois nomes tiverem duas indicações:
+		calcule o desempate pela média aritmética da prova didática
+		se o empate persiste:
+			calcule o desempate pela média aritmética da prova de títulos
+			se o empate persiste:
+				pergunte: "Qual candidato a Comissão Julgadora ou o Presidente escolheram?"
+				leia o candidato vencedor
+				preencha a coluna "posição" de CLASSIFICAÇÃO_FINAL com "j"
+				preencha a coluna "candidato" de CLASSIFICAÇÃO_FINAL com o nome do vencedor
+				preencha a coluna "indicações" de CLASSIFICAÇÃO_FINAL com "2"
+				exclua este nome das tabelas NOTAS_FINAIS_EXAMINADOR_1, ..., NOTAS_FINAIS_EXAMINADOR_5
+				reorganize as tabelas acima com a mesma ordem, mas agora sem o candidato já classificado
+			senão:
+				preencha a coluna "posição" de CLASSIFICAÇÃO_FINAL com "j"
+				preencha a coluna "candidato" de CLASSIFICAÇÃO_FINAL com o nome do vencedor
+				preencha a coluna "indicações" de CLASSIFICAÇÃO_FINAL com "2"
+				exclua este nome das tabelas NOTAS_FINAIS_EXAMINADOR_1, ..., NOTAS_FINAIS_EXAMINADOR_5
+				reorganize as tabelas acima com a mesma ordem, mas agora sem o candidato já classificado	
+		senão:
+			preencha a coluna "posição" de CLASSIFICAÇÃO_FINAL com "j"
+			preencha a coluna "candidato" de CLASSIFICAÇÃO_FINAL com o nome do vencedor
+			preencha a coluna "indicações" de CLASSIFICAÇÃO_FINAL com "2"
+			exclua este nome das tabelas NOTAS_FINAIS_EXAMINADOR_1, ..., NOTAS_FINAIS_EXAMINADOR_5
+			reorganize as tabelas acima com a mesma ordem, mas agora sem o candidato já classificado
+	senão: 
+		continua
+	
+	se apenas um nome teve duas indicações:
+		preencha a coluna "posição" de CLASSIFICAÇÃO_FINAL com "j"
+		preencha a coluna "candidato" de CLASSIFICAÇÃO_FINAL com o nome que teve 2 indicações
+		preencha a coluna "indicações" de CLASSIFICAÇÃO_FINAL com "2"
+
+	se todos os nomes empataram com 1 indicação cada:
+		calcule o desempate pela média aritmética da prova didática
+		se o empate persiste:
+			calcule o desempate pela média aritmética da prova de títulos
+			se o empate persiste:
+				pergunte: "Qual candidato a Comissão Julgadora ou o Presidente escolheram?"
+				leia o candidato vencedor
+				preencha a coluna "posição" de CLASSIFICAÇÃO_FINAL com "j"
+				preencha a coluna "candidato" de CLASSIFICAÇÃO_FINAL com o nome do vencedor
+				preencha a coluna "indicações" de CLASSIFICAÇÃO_FINAL com "1"
+				exclua este nome das tabelas NOTAS_FINAIS_EXAMINADOR_1, ..., NOTAS_FINAIS_EXAMINADOR_5
+				reorganize as tabelas acima com a mesma ordem, mas agora sem o candidato já classificado
+			senão:
+				preencha a coluna "posição" de CLASSIFICAÇÃO_FINAL com "j"
+				preencha a coluna "candidato" de CLASSIFICAÇÃO_FINAL com o nome do vencedor
+				preencha a coluna "indicações" de CLASSIFICAÇÃO_FINAL com "1"
+				exclua este nome das tabelas NOTAS_FINAIS_EXAMINADOR_1, ..., NOTAS_FINAIS_EXAMINADOR_5
+				reorganize as tabelas acima com a mesma ordem, mas agora sem o candidato já classificado	
+		senão:
+			preencha a coluna "posição" de CLASSIFICAÇÃO_FINAL com "j"
+			preencha a coluna "candidato" de CLASSIFICAÇÃO_FINAL com o nome do vencedor
+			preencha a coluna "indicações" de CLASSIFICAÇÃO_FINAL com "1"
+			exclua este nome das tabelas NOTAS_FINAIS_EXAMINADOR_1, ..., NOTAS_FINAIS_EXAMINADOR_5
+			reorganize as tabelas acima com a mesma ordem, mas agora sem o candidato já classificado
+Fim do repita
+
+### TELA 5
+Exibir as TABELAS NOTAS_FINAIS e CLASSIFICAÇÃO_FINAL
 	
