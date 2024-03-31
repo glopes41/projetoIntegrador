@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Lista de Prova
+{% endblock titulo%}
+
+{% block conteudo %}
+{% if prova_list %}
+<h2>Provas Cadastrados.</h2>
+<table class="tabela">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>concurso</th>
+            <th>tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for n in prova_list %}
+        <tr>
+            <th scope="row">{{ n.pk }}</th>
+            <td>{{ n.concurso }}</td>
+            <td>{{ n.tipo.descricao }}</td>
+            <td>
+                <a href="{% url 'prova_update' pk=n.pk %}"><button class="botao_confirmar">Alterar</button></a>
+                <a href="{% url 'prova_delete' pk=n.pk %}"><button class="botao_aviso">Excluir</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>Não há provas cadastrados.</h2>
+{% endif %}
+{% endblock conteudo %}

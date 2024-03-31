@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Lista de Tipos de Prova
+{% endblock titulo%}
+
+{% block conteudo %}
+{% if tipo_list %}
+<h2>Tipos de Provas Cadastrados.</h2>
+<table class="tabela">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>descrição</th>
+            <th>peso</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for n in tipo_list %}
+        <tr>
+            <th scope="row">{{ n.pk }}</th>
+            <td>{{ n.descricao }}</td>
+            <td>{{ n.peso }}</td>
+            <td>
+                <a href="{% url 'tipo_update' pk=n.pk %}"><button class="botao_confirmar">Alterar</button></a>
+                <a href="{% url 'tipo_delete' pk=n.pk %}"><button class="botao_aviso">Excluir</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>Não há tipos de provas cadastrados.</h2>
+{% endif %}
+{% endblock conteudo %}

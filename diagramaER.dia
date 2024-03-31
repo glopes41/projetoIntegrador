@@ -96,16 +96,17 @@
   <dia:layer name="Segundo plano" visible="true" connectable="false"/>
   <dia:layer name="Segundo plano" visible="true" connectable="false"/>
   <dia:layer name="Segundo plano" visible="true" connectable="false"/>
+  <dia:layer name="Segundo plano" visible="true" connectable="false"/>
   <dia:layer name="Segundo plano" visible="true" connectable="true" active="true">
     <dia:object type="ER - Entity" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="50,27.35"/>
+        <dia:point val="48.25,27.25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,27.3;54.915,29.2"/>
+        <dia:rectangle val="48.2,27.2;53.165,29.1"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50,27.35"/>
+        <dia:point val="48.25,27.25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="4.8650000000000002"/>
@@ -140,13 +141,13 @@
     </dia:object>
     <dia:object type="ER - Entity" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="51.4446,12.5089"/>
+        <dia:point val="50.3446,12.5089"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.3946,12.4589;56.7446,14.3589"/>
+        <dia:rectangle val="50.2946,12.4589;55.6446,14.3589"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51.4446,12.5089"/>
+        <dia:point val="50.3446,12.5089"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="5.25"/>
@@ -181,13 +182,13 @@
     </dia:object>
     <dia:object type="ER - Attribute" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="49.3321,23.6661"/>
+        <dia:point val="47.5821,23.5661"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.2821,23.6161;55.6171,25.5161"/>
+        <dia:rectangle val="47.5321,23.5161;53.8671,25.4161"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="49.3321,23.6661"/>
+        <dia:point val="47.5821,23.5661"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.2350000000000003"/>
@@ -228,13 +229,13 @@
     </dia:object>
     <dia:object type="ER - Attribute" version="0" id="O3">
       <dia:attribute name="obj_pos">
-        <dia:point val="56.4875,27.375"/>
+        <dia:point val="54.7375,27.275"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.4375,27.325;60.0775,29.225"/>
+        <dia:rectangle val="54.6875,27.225;58.3275,29.125"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="56.4875,27.375"/>
+        <dia:point val="54.7375,27.275"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="3.54"/>
@@ -275,13 +276,13 @@
     </dia:object>
     <dia:object type="ER - Attribute" version="0" id="O4">
       <dia:attribute name="obj_pos">
-        <dia:point val="58.7446,12.5089"/>
+        <dia:point val="57.6446,12.5089"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.6946,12.4589;65.4146,14.3589"/>
+        <dia:rectangle val="57.5946,12.4589;64.3146,14.3589"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="58.7446,12.5089"/>
+        <dia:point val="57.6446,12.5089"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.6200000000000001"/>
@@ -322,13 +323,13 @@
     </dia:object>
     <dia:object type="ER - Attribute" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="52.2946,9.3589"/>
+        <dia:point val="51.1946,9.3589"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.2446,9.3089;55.8846,11.2089"/>
+        <dia:rectangle val="51.1446,9.3089;54.7846,11.2089"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52.2946,9.3589"/>
+        <dia:point val="51.1946,9.3589"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="3.54"/>
@@ -369,16 +370,16 @@
     </dia:object>
     <dia:object type="ER - Participation" version="1" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="52.4496,25.5166"/>
+        <dia:point val="50.6996,25.4166"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.3825,25.4666;52.4996,27.3495"/>
+        <dia:rectangle val="50.6325,25.3666;50.7496,27.2495"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="52.4496,25.5166"/>
-        <dia:point val="52.4496,26.408"/>
-        <dia:point val="52.4325,26.408"/>
-        <dia:point val="52.4325,27.2995"/>
+        <dia:point val="50.6996,25.4166"/>
+        <dia:point val="50.6996,26.308"/>
+        <dia:point val="50.6825,26.308"/>
+        <dia:point val="50.6825,27.1995"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -398,16 +399,16 @@
     </dia:object>
     <dia:object type="ER - Participation" version="1" id="O7">
       <dia:attribute name="obj_pos">
-        <dia:point val="56.4371,28.275"/>
+        <dia:point val="54.6871,28.175"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.8653,28.2;56.4871,28.325"/>
+        <dia:rectangle val="53.1153,28.1;54.7371,28.225"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="56.4371,28.275"/>
-        <dia:point val="55.6762,28.275"/>
-        <dia:point val="55.6762,28.25"/>
-        <dia:point val="54.9153,28.25"/>
+        <dia:point val="54.6871,28.175"/>
+        <dia:point val="53.9262,28.175"/>
+        <dia:point val="53.9262,28.15"/>
+        <dia:point val="53.1653,28.15"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -427,16 +428,16 @@
     </dia:object>
     <dia:object type="ER - Participation" version="1" id="O8">
       <dia:attribute name="obj_pos">
-        <dia:point val="54.0646,11.2094"/>
+        <dia:point val="52.9646,11.2094"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.0146,11.1594;54.1196,12.5084"/>
+        <dia:rectangle val="52.9146,11.1594;53.0196,12.5084"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="54.0646,11.2094"/>
-        <dia:point val="54.0646,11.8339"/>
-        <dia:point val="54.0696,11.8339"/>
-        <dia:point val="54.0696,12.4584"/>
+        <dia:point val="52.9646,11.2094"/>
+        <dia:point val="52.9646,11.8339"/>
+        <dia:point val="52.9696,11.8339"/>
+        <dia:point val="52.9696,12.4584"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -456,16 +457,16 @@
     </dia:object>
     <dia:object type="ER - Participation" version="1" id="O9">
       <dia:attribute name="obj_pos">
-        <dia:point val="58.6942,13.4089"/>
+        <dia:point val="57.5942,13.4089"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.6949,13.3589;58.7442,13.4589"/>
+        <dia:rectangle val="55.5949,13.3589;57.6442,13.4589"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="58.6942,13.4089"/>
-        <dia:point val="57.7196,13.4089"/>
-        <dia:point val="57.7196,13.4089"/>
-        <dia:point val="56.7449,13.4089"/>
+        <dia:point val="57.5942,13.4089"/>
+        <dia:point val="56.6196,13.4089"/>
+        <dia:point val="56.6196,13.4089"/>
+        <dia:point val="55.6449,13.4089"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -582,13 +583,13 @@
         <dia:point val="44.0148,28.1895"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.9648,28.1395;49.9997,28.3"/>
+        <dia:rectangle val="43.9648,28.1;48.2497,28.2395"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="44.0148,28.1895"/>
-        <dia:point val="46.9823,28.1895"/>
-        <dia:point val="46.9823,28.25"/>
-        <dia:point val="49.9497,28.25"/>
+        <dia:point val="46.1073,28.1895"/>
+        <dia:point val="46.1073,28.15"/>
+        <dia:point val="48.1997,28.15"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -608,14 +609,14 @@
     </dia:object>
     <dia:object type="ER - Participation" version="1" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="54.0696,14.3089"/>
+        <dia:point val="52.9696,14.3089"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.76,14.2589;54.1196,19.493"/>
+        <dia:rectangle val="47.76,14.2589;53.0196,19.493"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="54.0696,14.3089"/>
-        <dia:point val="54.0696,19.443"/>
+        <dia:point val="52.9696,14.3089"/>
+        <dia:point val="52.9696,19.443"/>
         <dia:point val="47.81,19.443"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -635,13 +636,13 @@
     </dia:object>
     <dia:object type="ER - Attribute" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="49.8679,31.2929"/>
+        <dia:point val="48.1179,31.1929"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.8179,31.2429;54.9979,33.1429"/>
+        <dia:rectangle val="48.0679,31.1429;53.2479,33.0429"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="49.8679,31.2929"/>
+        <dia:point val="48.1179,31.1929"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="5.0800000000000001"/>
@@ -682,16 +683,16 @@
     </dia:object>
     <dia:object type="ER - Participation" version="1" id="O15">
       <dia:attribute name="obj_pos">
-        <dia:point val="52.4079,31.2424"/>
+        <dia:point val="50.6579,31.1424"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.3579,29.1505;52.4825,31.2924"/>
+        <dia:rectangle val="50.6079,29.0505;50.7325,31.1924"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="52.4079,31.2424"/>
-        <dia:point val="52.4079,30.2215"/>
-        <dia:point val="52.4325,30.2215"/>
-        <dia:point val="52.4325,29.2005"/>
+        <dia:point val="50.6579,31.1424"/>
+        <dia:point val="50.6579,30.1214"/>
+        <dia:point val="50.6825,30.1214"/>
+        <dia:point val="50.6825,29.1005"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -946,13 +947,13 @@
     </dia:object>
     <dia:object type="ER - Attribute" version="0" id="O21">
       <dia:attribute name="obj_pos">
-        <dia:point val="55.2234,32.375"/>
+        <dia:point val="53.4734,32.275"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.1734,32.325;61.1234,34.225"/>
+        <dia:rectangle val="53.4234,32.225;59.3734,34.125"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="55.2234,32.375"/>
+        <dia:point val="53.4734,32.275"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="5.8499999999999996"/>
@@ -993,16 +994,16 @@
     </dia:object>
     <dia:object type="ER - Participation" version="1" id="O22">
       <dia:attribute name="obj_pos">
-        <dia:point val="58.1484,32.3245"/>
+        <dia:point val="56.3984,32.2245"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.3825,29.1505;58.1984,32.3745"/>
+        <dia:rectangle val="50.6325,29.0505;56.4484,32.2745"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="58.1484,32.3245"/>
-        <dia:point val="58.1484,30.7625"/>
-        <dia:point val="52.4325,30.7625"/>
-        <dia:point val="52.4325,29.2005"/>
+        <dia:point val="56.3984,32.2245"/>
+        <dia:point val="56.3984,30.6625"/>
+        <dia:point val="50.6825,30.6625"/>
+        <dia:point val="50.6825,29.1005"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

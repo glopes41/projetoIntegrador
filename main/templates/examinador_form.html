@@ -17,7 +17,9 @@ Novo Examinador
 
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    <table>
+        {{ form.as_table }}
+    </table>
     <button type="submit" class="botao_confirmar">Confirmar</button>
     <a href="{% url 'examinador_list' %}" class="botao_confirmar">Cancelar</a>
 </form>

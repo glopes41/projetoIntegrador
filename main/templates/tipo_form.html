@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-{% if candidato.pk %}
-Editar Candidato
+{% if tipo.pk %}
+Editar Tipo de Prova
 {% else %}
-Novo Candidato
+Novo Tipo de Prova
 {% endif %}
 {% endblock titulo %}
 
 {% block conteudo %}
-{% if candidato.pk %}
-<h2>Editar candidato.</h2>
+{% if tipo.pk %}
+<h2>Editar Tipo de Prova</h2>
 {% else %}
-<h2>Cadastrar novo candidato.</h2>
+<h2>Cadastrar novo tipo de prova</h2>
 {% endif %}
 
 <form method="POST">
@@ -21,6 +21,6 @@ Novo Candidato
         {{ form.as_table }}
     </table>
     <button type="submit" class="botao_confirmar">Confirmar</button>
-    <a href="{% url 'candidato_list' %}" class="botao_confirmar">Cancelar</a>
+    <a href="{% url 'tipo_list' %}" class="botao_confirmar">Cancelar</a>
 </form>
 {% endblock conteudo %}

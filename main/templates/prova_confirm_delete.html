@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Excluir Prova
+{% endblock titulo %}
+
+{% block conteudo %}
+<h2>Excluir Prova?</h2>
+<p>Tem certeza que deseja excluir a prova <strong>{{ prova.descricao }}</strong>?</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="botao_aviso">Sim</button>
+    <a href="{% url 'prova_list' %}" class="botao_confirmar">Cancelar</a>
+</form>
+{% endblock conteudo %}

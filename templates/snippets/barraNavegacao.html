@@ -1,7 +1,21 @@
-<div class="topnav">
+<div class="navbar">
     <a href="{% url 'index' %}">Inicial</a>
-    <a href="{% url 'candidato_form' %}"> Cadastro Candidatos </a>
-    <a href="{% url 'candidato_list' %}"> Lista Candidatos </a>
-    <a href="{% url 'examinador_form' %}"> Cadastro Examinadores </a>
-    <a href="{% url 'examinador_list' %}"> Lista Examinadores </a>
+    <div class="dropdown">
+        <button class="dropbtn">Cadastrar</button>
+        <div class="dropdown-content">
+            <a href="{% url 'candidato_form' %}"> Candidatos </a>
+            <a href="{% url 'examinador_form' %}"> Examinadores </a>
+            <a href="{% url 'tipo_form' %}"> Tipos de Provas </a>
+            <a href="{% url 'prova_form' %}"> Provas </a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">Listar</button>
+        <div class="dropdown-content">
+            <a href="{% url 'candidato_list' %}"> Candidatos </a>
+            <a href="{% url 'examinador_list' %}"> Examinadores </a>
+            <a href="{% url 'tipo_list' %}"> Tipo de Provas </a>
+            <a href="{% url 'prova_list' %}"> Provas </a>
+        </div>
+    </div>
 </div>
