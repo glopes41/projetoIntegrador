@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-{% if candidato.pk %}
-Editar Candidato
+{% if examinador.pk %}
+Editar Examinador
 {% else %}
-Novo Candidato
+Novo Examinador
 {% endif %}
 {% endblock titulo %}
 
 {% block conteudo %}
-{% if candidato.pk %}
-<h2>Editar candidato.</h2>
+{% if examinador.pk %}
+<h2>Editar Examinador.</h2>
 {% else %}
-<h2>Cadastrar novo candidato.</h2>
+<h2>Cadastrar novo examinador.</h2>
 {% endif %}
 
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="botao_confirmar">Confirmar</button>
-    <a href="{% url 'candidato_list' %}" class="botao_confirmar">Cancelar</a>
+    <a href="{% url 'examinador_list' %}" class="botao_confirmar">Cancelar</a>
 </form>
 {% endblock conteudo %}

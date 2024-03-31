@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Lista de Examinadores
+{% endblock titulo%}
+
+{% block conteudo %}
+{% if examinador_list %}
+<h2>Examinadores Cadastrados.</h2>
+<table class="tabela">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nome</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for n in examinador_list %}
+        <tr>
+            <th scope="row">{{ n.pk }}</th>
+            <td>{{ n.nome }}</td>
+            <td>
+                <a href="{% url 'examinador_update' pk=n.pk %}"><button class="botao_confirmar">Alterar</button></a>
+                <a href="{% url 'examinador_delete' pk=n.pk %}"><button class="botao_aviso">Excluir</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>Não há examinadores cadastrados.</h2>
+{% endif %}
+{% endblock conteudo %}

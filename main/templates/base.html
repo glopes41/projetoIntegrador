@@ -6,30 +6,29 @@
 
 <head>
 
-<!-- tags meta obrigatórias -->
+    <!-- tags meta obrigatórias -->
 
-<meta charset=”utf-8”>
+    <meta charset=”utf-8”>
 
-<meta name=”viewport” content=”width=device-width, initial-scale=1, shrink-to-fit=no”>
+    <meta name=”viewport” content=”width=device-width, initial-scale=1, shrink-to-fit=no”>
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
-<title>
-    {% block titulo %}
-    {% endblock titulo %}
-</title>
+    <title>
+        {% block titulo %}
+        {% endblock titulo %}
+    </title>
 
 </head>
 
 <body>
 
-{% include 'snippets/barraNavegacao.html' %}
+    {% include 'snippets/barraNavegacao.html' %}
 
-{% block conteudo %}
+    {% block conteudo %}
+    {% endblock conteudo %}
 
-{% endblock conteudo %}
-
-{% include 'snippets/rodape.html' %}
+    {% include 'snippets/rodape.html' %}
 
 </body>
 

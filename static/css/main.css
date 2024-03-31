@@ -1,18 +1,18 @@
-.topnav{
-    background-color: #333;
-    overflow: hidden;
+.topnav {
+  background-color: #333;
+  overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
-  
+
 /* Change the color of links on hover */
 .topnav a:hover {
   background-color: #ddd;
@@ -25,12 +25,12 @@
   color: white;
 }
 
-body{
+body {
   background-color: rgb(233, 231, 228);
 }
 
 /* Style the links inside the navigation bar */
-.rodape{
+.rodape {
   color: #000000;
   text-align: left;
   padding: 14px 16px;
@@ -40,30 +40,58 @@ body{
   width: 100%;
 }
 
-.botao_confirmar{
+.botao_confirmar {
   border-style: none;
   border-radius: 3px;
   color: #ffffff;
   background-color: #4f69dd;
   text-align: center;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 13px;
   margin: 2px 2px;
+  padding: 2px;
+  height: 22px;
+  width: auto;
 }
 
-.botao_confirmar:hover{
+.botao_confirmar:hover {
   background-color: #4f69dd;
   color: black;
 }
 
-.botao_aviso{
+.botao_aviso {
   border: none;
   border-radius: 3px;
   color: #ffffff;
   background-color: #c55757;
   text-align: center;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 13px;
   margin: 2px 2px;
+  padding: 2px;
+  height: 22px;
+  width: auto;
 }
 
-.botao_aviso:hover{
+.botao_aviso:hover {
   background-color: #c55757;
   color: black;
+}
+
+.tabela {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tabela th,
+tr {
+  padding: 6px;
+  text-align: left;
+  border-bottom: 1px solid #bebec9;
+}
+
+.tabela tr:hover {
+  background-color: #e2e2e2;
 }
