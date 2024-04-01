@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Lista de Concursos
+{% endblock titulo%}
+
+{% block conteudo %}
+{% if concurso_list %}
+<h2>Concursos Cadastrados.</h2>
+<table class="tabela">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>data</th>
+            <th>descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for n in concurso_list %}
+        <tr>
+            <th scope="row">{{ n.pk }}</th>
+            <td>{{ n.data }}</td>
+            <td>{{ n.descricao }}</td>
+            <td>
+                <a href="{% url 'concurso_update' pk=n.pk %}"><button class="botao_confirmar">Alterar</button></a>
+                <a href="{% url 'concurso_delete' pk=n.pk %}"><button class="botao_aviso">Excluir</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>Não há concursos cadastrados.</h2>
+{% endif %}
+{% endblock conteudo %}

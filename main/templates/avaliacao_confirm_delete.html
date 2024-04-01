@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Excluir Avaliação
+{% endblock titulo %}
+
+{% block conteudo %}
+<h2>Excluir Avaliação?</h2>
+<p>Tem certeza que deseja excluir a avaliação <strong>{{ avaliacao.descricao }}</strong>?</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="botao_aviso">Sim</button>
+    <a href="{% url 'avaliacao_list' %}" class="botao_confirmar">Cancelar</a>
+</form>
+{% endblock conteudo %}

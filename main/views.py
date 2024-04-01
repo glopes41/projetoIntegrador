@@ -1,6 +1,6 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Candidato, Examinador, Tipo, Prova
+from .models import Candidato, Examinador, Tipo, Prova, Avaliacao, Concurso
 from .forms import ProvaForm
 
 class CadastroCandidatosList(ListView):
@@ -58,19 +58,68 @@ class CadastroTipoDelete(DeleteView):
     success_url = reverse_lazy("tipo_list")
 
 class CadastroProvaList(ListView):
+    template_name = 'prova_list.html'
     model = Prova
 
 class CadastroProvaCreate(CreateView):
+    template_name = 'prova_form.html'
     model = Prova
-    form_class = ProvaForm
+    fields = ["tipo", "concurso"]
     success_url = reverse_lazy("prova_form")
 
 class CadastroProvaUpdate(UpdateView):
+    template_name = 'prova_form.html'
     model = Prova
     fields =  ["tipo", "concurso"]
     success_url = reverse_lazy("prova_list")
 
 class CadastroProvaDelete(DeleteView):
+    template_name = 'prova_confirm_delete.html'
     model = Prova
     fields = ["tipo", "concurso"]
     success_url = reverse_lazy("prova_list")
+
+class CadastroAvaliacaoList(ListView):
+    template_name = 'avaliacao_list.html'
+    model = Avaliacao
+    
+class CadastroAvaliacaoCreate(CreateView):
+    template_name = 'avaliacao_form.html'
+    model = Avaliacao
+    fields = ["nota", "data", "prova", "candidato", "avaliacao"]
+    success_url = reverse_lazy("avaliacao_form")
+
+class CadastroAvaliacaoUpdate(UpdateView):
+    template_name = 'avaliacao_form.html'
+    model = Avaliacao
+    
+    fields = ["nota", "data", "prova", "candidato"]
+    success_url = reverse_lazy("avaliacao_list")
+
+class CadastroAvaliacaoDelete(DeleteView):
+    template_name = 'avaliacao_confirm_delete.html'
+    model = Avaliacao
+    fields = ["nota", "data", "prova", "candidato"]
+    success_url = reverse_lazy("avaliacao_list")
+
+class CadastroConcursoList(ListView):
+    template_name = 'concurso_list.html'
+    model = Concurso
+    
+class CadastroConcursoCreate(CreateView):
+    template_name = 'concurso_form.html'
+    model = Concurso
+    fields = [ "data", "descricao"]
+    success_url = reverse_lazy("concurso_form")
+
+class CadastroConcursoUpdate(UpdateView):
+    template_name = 'concurso_form.html'
+    model = Concurso
+    fields = [ "data", "descricao"]
+    success_url = reverse_lazy("concurso_form")
+
+class CadastroConcursoDelete(DeleteView):
+    template_name = 'concurso_form.html'
+    model = Concurso
+    fields = [ "data", "descricao"]
+    success_url = reverse_lazy("concurso_form")

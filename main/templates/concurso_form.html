@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+{% if concurso.pk %}
+Editar Concurso
+{% else %}
+Novo Concurso
+{% endif %}
+{% endblock titulo %}
+
+{% block conteudo %}
+{% if concurso.pk %}
+<h2>Editar Concurso</h2>
+{% else %}
+<h2>Cadastrar novo Concurso</h2>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button type="submit" class="botao_confirmar">Confirmar</button>
+    <a href="{% url 'concurso_list' %}" class="botao_confirmar">Cancelar</a>
+</form>
+{% endblock conteudo %}

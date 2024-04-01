@@ -12,6 +12,8 @@ Lista de Candidatos
         <tr>
             <th>id</th>
             <th>nome</th>
+            <th>aprovado</th>
+            <th>habilitado</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +21,8 @@ Lista de Candidatos
         <tr>
             <th scope="row">{{ n.pk }}</th>
             <td>{{ n.nome }}</td>
+            <td>{{ n.aprovado }}</td>
+            <td>{{ n.habilitado }}</td>
             <td>
                 <a href="{% url 'candidato_update' pk=n.pk %}"><button class="botao_confirmar">Alterar</button></a>
                 <a href="{% url 'candidato_delete' pk=n.pk %}"><button class="botao_aviso">Excluir</button></a>

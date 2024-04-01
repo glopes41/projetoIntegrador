@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Lista de Avaliações
+{% endblock titulo%}
+
+{% block conteudo %}
+{% if avaliacao_list %}
+<h2>Avaliações Cadastradas.</h2>
+<table class="tabela">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>data</th>
+            <th>nota</th>
+            <th>candidato</th>
+            <th>prova</th>
+            <th>tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for n in avaliacao_list %}
+        <tr>
+            <th scope="row">{{ n.pk }}</th>
+            <td>{{ n.data }}</td>
+            <td>{{ n.nota }}</td>
+            <td>{{ n.candidato }}</td>
+            <td>{{ n.prova }}</td>
+            <td>{{ n.tipo }}</td>
+            <td>
+                <a href="{% url 'avaliacao_update' pk=n.pk %}"><button class="botao_confirmar">Alterar</button></a>
+                <a href="{% url 'avaliacao_delete' pk=n.pk %}"><button class="botao_aviso">Excluir</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>Não há avaliações cadastradas.</h2>
+{% endif %}
+{% endblock conteudo %}
