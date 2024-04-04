@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-{% if candidato.pk %}
+{% if notas.pk %}
 Editar Candidato
 {% else %}
 Novo Candidato
@@ -9,7 +9,7 @@ Novo Candidato
 {% endblock titulo %}
 
 {% block conteudo %}
-{% if candidato.pk %}
+{% if notas.pk %}
 <h2>Editar candidato.</h2>
 {% else %}
 <h2>Cadastrar novo candidato.</h2>
@@ -21,6 +21,6 @@ Novo Candidato
         {{ form.as_table }}
     </table>
     <button type="submit" class="botao_confirmar">Confirmar</button>
-    <a href="{% url 'candidato_list' %}" class="botao_confirmar">Cancelar</a>
+    <a href="{% url 'notas_list' %}" class="botao_confirmar">Cancelar</a>
 </form>
 {% endblock conteudo %}

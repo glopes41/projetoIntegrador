@@ -6,10 +6,10 @@ Excluir Candidato
 
 {% block conteudo %}
 <h2>Excluir Candidato?</h2>
-<p>Tem certeza que deseja excluir o candidato <strong>{{ candidato.nome }}</strong>?</p>
+<p>Tem certeza que deseja excluir o candidato <strong>{{ notas.candidato }}</strong>?</p>
 <form method="POST">
     {% csrf_token %}
     <button type="submit" class="botao_aviso">Sim</button>
-    <a href="{% url 'candidato_list' %}" class="botao_confirmar">Cancelar</a>
+    <a href="{% url 'notas_list' %}" class="botao_confirmar">Cancelar</a>
 </form>
 {% endblock conteudo %}

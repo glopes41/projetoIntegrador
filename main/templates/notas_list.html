@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Lista de Candidatos
+{% endblock titulo%}
+
+{% block conteudo %}
+{% if notas_list %}
+<h2>Candidatos Cadastrados.</h2>
+<table class="tabela">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>candidato</th>
+            <th>examinador_1</th>
+            <th>examinador_2</th>
+            <th>examinador_3</th>
+            <th>examinador_4</th>
+            <th>examinador_5</th>
+            <th>prova</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for n in notas_list %}
+        <tr>
+            <th scope="row">{{ n.pk }}</th>
+            <td>{{ n.candidato }}</td>
+            <td>{{ n.examinador_1 }}</td>
+            <td>{{ n.examinador_2 }}</td>
+            <td>{{ n.examinador_3 }}</td>
+            <td>{{ n.examinador_4 }}</td>
+            <td>{{ n.examinador_5 }}</td>
+            <td>{{ n.prova_id }}</td>
+            <td>
+                <a href="{% url 'notas_update' pk=n.pk %}"><button class="botao_confirmar">Alterar</button></a>
+                <a href="{% url 'notas_delete' pk=n.pk %}"><button class="botao_aviso">Excluir</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>Não há candidatos cadastrados.</h2>
+{% endif %}
+{% endblock conteudo %}
