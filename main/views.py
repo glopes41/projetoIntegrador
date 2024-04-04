@@ -1,7 +1,9 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
 from .models import Candidato, Examinador, Tipo, Prova, Avaliacao, Concurso
-from .forms import ProvaForm
+from django.views.generic.edit import FormView
+from .forms import FormAvaliacao
+from django.db.models import Sum, F
 
 class CandidatoListView(ListView):
     model = Candidato
@@ -85,11 +87,19 @@ class CadastroAvaliacaoList(ListView):
     model = Avaliacao
     
 class CadastroAvaliacaoCreate(CreateView):
-    template_name = 'avaliacao_form.html'
     model = Avaliacao
-    fields = ["nota", "data", "prova", "candidato", "avaliacao"]
-    success_url = reverse_lazy("avaliacao_form")
+    template_name = 'avaliacao_form.html'
+    success_url = reverse_lazy('avaliacao_form')
+    form_class = FormAvaliacao
 
+    def form_valid(self, form):
+        prova = form.save()  # Chama o método save_prova() no formulário para criar a Prova automaticamente
+        form.instance.prova = prova  # Associa a Prova à Avaliacao
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('avaliacao_form')  # Substitua 'sucesso' pelo nome da sua URL de sucesso
+    
 class CadastroAvaliacaoUpdate(UpdateView):
     template_name = 'avaliacao_form.html'
     model = Avaliacao
@@ -126,11 +136,17 @@ class CadastroConcursoDelete(DeleteView):
     success_url = reverse_lazy("concurso_form")
 
 class ConsultaAprovados(ListView):
-    model = Avaliacao
-    context_object_name = 'aprovados'
     template_name = 'aprovados_list.html'
+    context_object_name = 'media'
     
-    def get_context_data(self, **kwargs):
-        context = super(ConsultaAprovados, self).get_context_data(**kwargs)
-        context['num_aprovados'] = Avaliacao.objects.filter(nota__gt=7).count()
-        return context
+    def get_queryset(self):
+        queryset = (Candidato.objects
+            .annotate(candidato=F('nome'))
+            .annotate(examinador=F('avaliacao__avaliacao__examinador__nome'))
+            .annotate(soma_notas_peso=Sum(F('avaliacao__nota') * F('avaliacao__prova__tipo__peso')))
+            .annotate(soma_pesos=Sum('avaliacao__prova__tipo__peso'))
+            .annotate(media=Sum('soma_notas_peso') / Sum('soma_pesos'))
+            .values('candidato', 'examinador', 'media')
+            .order_by('candidato', 'examinador'))
+        return queryset
+

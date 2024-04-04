@@ -5,24 +5,24 @@ Lista de Aprovados
 {% endblock titulo%}
 
 {% block conteudo %}
-{% if aprovados %}
+{% if media %}
 <h2>Aprovados</h2>
 <table class="tabela">
     <thead>
         <tr>
             <th>id</th>
-            <th>data</th>
-            <th>nota</th>
-            <th>num</th>
+            <th>candidato</th>
+            <th>examinador</th>
+            <th>media</th>
         </tr>
     </thead>
     <tbody>
-        {% for n in aprovados %}
+        {% for n in media %}
         <tr>
             <th scope="row">{{ n.pk }}</th>
-            <td>{{ n.data }}</td>
-            <td>{{ n.nota }}</td>
-            <td>{{ num_aprovados }}</td>
+            <td>{{ n.nome }}</td>
+            <td>{{ n.examinador }}</td>
+            <td>{{ n.media }}</td>
         </tr>
         {% endfor %}
     </tbody>

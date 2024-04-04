@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+{% if avaliacao.pk %}
+Cadastro Geral
+{% else %}
+Nova Avaliação
+{% endif %}
+{% endblock titulo %}
+
+{% block conteudo %}
+{% if avaliacao.pk %}
+<h2>Editar Avaliação</h2>
+{% else %}
+<h2>Cadastrar nova Avaliação</h2>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button type="submit" class="botao_confirmar">Confirmar</button>
+    <a href="{% url 'avaliacao_list' %}" class="botao_confirmar">Cancelar</a>
+</form>
+{% endblock conteudo %}

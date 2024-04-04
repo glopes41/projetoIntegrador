@@ -1,0 +1,18 @@
+SELECT 
+    main_candidato.nome AS candidato,
+    main_examinador.nome AS examinador,
+    SUM(main_avaliacao.nota * main_tipo.peso)/SUM(main_tipo.peso) AS media
+FROM 
+    main_candidato
+JOIN 
+    main_avaliacao ON main_candidato.id = main_avaliacao.candidato_id
+JOIN 
+    main_prova ON main_avaliacao.prova_id = main_prova.id
+JOIN 
+    main_tipo ON main_prova.tipo_id = main_tipo.id
+JOIN 
+    main_avaliacao_avaliacao ON main_avaliacao.id = main_avaliacao_avaliacao.avaliacao_id
+JOIN 
+    main_examinador ON main_avaliacao_avaliacao.examinador_id = main_examinador.id
+GROUP BY 
+    main_candidato.nome, main_examinador.nome;
