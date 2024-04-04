@@ -5,7 +5,7 @@ class Tipo(models.Model):
     descricao = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
-        return self.descricao
+        return f'{self.descricao}'
 
 class Concurso(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -13,7 +13,7 @@ class Concurso(models.Model):
     descricao = models.CharField(max_length=200, null=False, blank=False)
 
     def __str__(self) -> str:
-        return str(self.id)
+        return f'{self.id}'
 
 class Prova(models.Model):
     id = models.BigAutoField(primary_key=True)

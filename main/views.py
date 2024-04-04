@@ -3,10 +3,11 @@ from django.urls import reverse_lazy
 from .models import Candidato, Examinador, Tipo, Prova, Avaliacao, Concurso
 from .forms import ProvaForm
 
-class CadastroCandidatosList(ListView):
+class CandidatoListView(ListView):
     model = Candidato
+    paginate_by = 10
     
-class CadastroCandidatosCreate(CreateView):
+class CandidatoCreateView(CreateView):
     model = Candidato
     fields = ["nome"]
     success_url = reverse_lazy("candidato_form")
@@ -123,3 +124,13 @@ class CadastroConcursoDelete(DeleteView):
     model = Concurso
     fields = [ "data", "descricao"]
     success_url = reverse_lazy("concurso_form")
+
+class ConsultaAprovados(ListView):
+    model = Avaliacao
+    context_object_name = 'aprovados'
+    template_name = 'aprovados_list.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ConsultaAprovados, self).get_context_data(**kwargs)
+        context['num_aprovados'] = Avaliacao.objects.filter(nota__gt=7).count()
+        return context

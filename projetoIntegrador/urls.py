@@ -3,18 +3,19 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
-from main.views import CadastroCandidatosCreate, CadastroCandidatosList, CadastroCandidatoUpdate, CadastroCandidatoDelete
+from main.views import CandidatoCreateView, CandidatoListView, CadastroCandidatoUpdate, CadastroCandidatoDelete
 from main.views import CadastroExaminadorList, CadastroExaminadorUpdate, CadastroExaminadorCreate, CadastroExaminadorDelete
 from main.views import CadastroTipoList, CadastroTipoCreate, CadastroTipoUpdate, CadastroTipoDelete
 from main.views import CadastroProvaList, CadastroProvaCreate, CadastroProvaUpdate, CadastroProvaDelete
 from main.views import CadastroAvaliacaoList, CadastroAvaliacaoDelete, CadastroAvaliacaoCreate, CadastroAvaliacaoUpdate
 from main.views import CadastroConcursoDelete, CadastroConcursoCreate, CadastroConcursoList, CadastroConcursoUpdate
+from main.views import ConsultaAprovados
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html'), name='index'),
-    path('candidato-form', CadastroCandidatosCreate.as_view(template_name='candidato_form.html'), name='candidato_form'),
-    path('candidato-list', CadastroCandidatosList.as_view(template_name='candidato_list.html'), name='candidato_list'),
+    path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('candidato-form', CandidatoCreateView.as_view(template_name='candidato_form.html'), name='candidato_form'),
+    path('candidato-list', CandidatoListView.as_view(template_name='candidato_list.html'), name='candidato_list'),
     path("update-candidato/<int:pk>", CadastroCandidatoUpdate.as_view(template_name='candidato_form.html'), name='candidato_update'),
     path("delete-candidato/<int:pk>", CadastroCandidatoDelete.as_view(template_name='candidato_confirm_delete.html'), name="candidato_delete"),
     path('examinador-form', CadastroExaminadorCreate.as_view(template_name='examinador_form.html'), name='examinador_form'),
@@ -37,4 +38,5 @@ urlpatterns = [
     path('concurso-form', CadastroConcursoCreate.as_view(), name='concurso_form'),
     path("update-concurso/<int:pk>", CadastroConcursoUpdate.as_view(), name='concurso_update'),
     path("delete-concurso/<int:pk>", CadastroConcursoDelete.as_view(), name="concurso_delete"),
+    path('aprovados-list', ConsultaAprovados.as_view(), name='aprovados_list'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

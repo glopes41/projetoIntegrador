@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Lista de Candidatos
+{% endblock titulo%}
+
+{% block conteudo %}
+<p> Selecione uma das opções abaixo para continuar: </p>
+<p><a href="{% url 'concurso_form' %}">Novo concurso</a></p>
+<p><a href="{% url 'concurso_list' %}">Alterar dados de um concurso</a></p>
+{% endblock conteudo %}

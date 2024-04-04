@@ -15,7 +15,6 @@ Lista de Avaliações
             <th>nota</th>
             <th>candidato</th>
             <th>prova</th>
-            <th>tipo</th>
         </tr>
     </thead>
     <tbody>
@@ -26,7 +25,6 @@ Lista de Avaliações
             <td>{{ n.nota }}</td>
             <td>{{ n.candidato }}</td>
             <td>{{ n.prova }}</td>
-            <td>{{ n.tipo }}</td>
             <td>
                 <a href="{% url 'avaliacao_update' pk=n.pk %}"><button class="botao_confirmar">Alterar</button></a>
                 <a href="{% url 'avaliacao_delete' pk=n.pk %}"><button class="botao_aviso">Excluir</button></a>
