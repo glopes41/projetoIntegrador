@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Lista de Aprovados
+{% endblock titulo%}
+
+{% block conteudo %}
+{% if medias %}
+<h2>Aprovados</h2>
+<table class="tabela">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>candidato</th>
+            <th>media_1</th>
+            <th>media_2</th>
+            <th>media_3</th>
+            <th>media_4</th>
+            <th>media_5</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for n in medias %}
+        <tr>
+            <th scope="row">{{ n.pk }}</th>
+            <td>{{ n.candidato }}</td>
+            <td>{{ n.media_1 | floatformat:2 }}</td>
+            <td>{{ n.media_2 | floatformat:2 }}</td>
+            <td>{{ n.media_3 | floatformat:2 }}</td>
+            <td>{{ n.media_4 | floatformat:2 }}</td>
+            <td>{{ n.media_5 | floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>Não há aprovados.</h2>
+{% endif %}
+{% endblock conteudo %}

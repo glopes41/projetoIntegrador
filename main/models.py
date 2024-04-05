@@ -4,6 +4,9 @@ class Pesos(models.Model):
     nome = models.CharField(max_length=100)
     peso = models.DecimalField(max_digits=5, decimal_places=2)
 
+    def __str__(self):
+        return self.nome
+
 class Notas(models.Model):
     candidato = models.CharField(max_length=100, db_index=True)
     examinador_1 = models.DecimalField(max_digits=5, decimal_places=2)
@@ -11,4 +14,4 @@ class Notas(models.Model):
     examinador_3 = models.DecimalField(max_digits=5, decimal_places=2)
     examinador_4 = models.DecimalField(max_digits=5, decimal_places=2)
     examinador_5 = models.DecimalField(max_digits=5, decimal_places=2)
-    prova = models.ForeignKey(Pesos, null=False, on_delete=models.CASCADE )
+    prova = models.ForeignKey(Pesos, on_delete=models.CASCADE )

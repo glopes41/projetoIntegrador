@@ -1,0 +1,7 @@
+SELECT candidato,
+sum(examinador_1*p.peso)/sum(p.peso) AS media_1,
+sum(examinador_2*p.peso)/sum(p.peso) AS media_2,
+sum(examinador_3*p.peso)/sum(p.peso) AS media_3,
+sum(examinador_4*p.peso)/sum(p.peso) AS media_4,
+sum(examinador_5*p.peso)/sum(p.peso) AS media_5
+FROM main_notas n INNER JOIN main_pesos p ON n.prova_id = p.id
