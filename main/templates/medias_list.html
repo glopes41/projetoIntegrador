@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-Lista de Aprovados
+Médias
 {% endblock titulo%}
 
 {% block conteudo %}
 {% if media %}
-<h2>Aprovados</h2>
+<h2>Médias</h2>
 <table class="tabela">
     <thead>
         <tr>
@@ -22,12 +22,12 @@ Lista de Aprovados
             <th scope="row">{{ n.pk }}</th>
             <td>{{ n.nome }}</td>
             <td>{{ n.examinador }}</td>
-            <td>{{ n.media }}</td>
+            <td>{{ n.media | floatformat:2 }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 {% else %}
-<h2>Não há aprovados.</h2>
+<h2>Não há médias.</h2>
 {% endif %}
 {% endblock conteudo %}
