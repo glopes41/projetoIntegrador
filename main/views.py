@@ -137,5 +137,6 @@ class ConsultaMedias(ListView):
             GROUP BY 
                 main_candidato.nome, main_examinador.nome;
         '''))
-        return queryset
 
+        return queryset
+    
