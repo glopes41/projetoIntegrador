@@ -8,7 +8,7 @@ from main.views import CadastroExaminadorList, CadastroExaminadorUpdate, Cadastr
 from main.views import CadastroTipoList, CadastroTipoCreate, CadastroTipoUpdate, CadastroTipoDelete
 from main.views import CadastroAvaliacaoList, CadastroAvaliacaoDelete, CadastroAvaliacaoCreate, CadastroAvaliacaoUpdate
 from main.views import CadastroConcursoDelete, CadastroConcursoCreate, CadastroConcursoList, CadastroConcursoUpdate
-from main.views import ConsultaMedias
+from main.views import ConsultaMedias, VerificaAprovadosList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,4 +34,5 @@ urlpatterns = [
     path("update-concurso/<int:pk>", CadastroConcursoUpdate.as_view(), name='concurso_update'),
     path("delete-concurso/<int:pk>", CadastroConcursoDelete.as_view(), name="concurso_delete"),
     path('medias-list', ConsultaMedias.as_view(), name='medias_list'),
+    path('aprovados-list', VerificaAprovadosList.as_view(), name='aprovados_list'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

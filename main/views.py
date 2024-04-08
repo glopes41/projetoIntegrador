@@ -2,10 +2,10 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, T
 from django.urls import reverse_lazy
 from .models import Candidato, Examinador, Tipo, Prova, Avaliacao, Concurso
 from .forms import FormAvaliacao
+from collections import defaultdict
 
 class CandidatoListView(ListView):
     model = Candidato
-    paginate_by = 10
     
 class CandidatoCreateView(CreateView):
     model = Candidato
@@ -110,18 +110,19 @@ class CadastroConcursoDelete(DeleteView):
     model = Concurso
     fields = [ "data", "descricao"]
     success_url = reverse_lazy("concurso_form")
+        
 
 class ConsultaMedias(ListView):
     template_name = 'medias_list.html'
     context_object_name = 'media'
-    
+
     def get_queryset(self):
         queryset = (Candidato.objects.raw('''
             SELECT
                 main_candidato.id,
                 main_candidato.nome AS candidato,
                 main_examinador.nome AS examinador,
-                SUM(main_avaliacao.nota * main_tipo.peso)/SUM(main_tipo.peso) AS media
+                CAST(SUM(main_avaliacao.nota * main_tipo.peso) AS FLOAT) / CAST(SUM(main_tipo.peso) AS FLOAT) AS media
             FROM 
                 main_candidato
             JOIN 
@@ -136,7 +137,38 @@ class ConsultaMedias(ListView):
                 main_examinador ON main_avaliacao_avaliacao.examinador_id = main_examinador.id
             GROUP BY 
                 main_candidato.nome, main_examinador.nome;
-        '''))
+        '''))     
 
         return queryset
-    
+
+class VerificaAprovadosList(ListView):
+    template_name = 'aprovados_list.html'
+    context_object_name = 'aprovados'
+    model = Candidato
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.calcula_medias()
+        return queryset
+
+    def calcula_medias(self):
+        # Execute a consulta SQL
+        consulta = ConsultaMedias()
+        resultado = consulta.get_queryset()
+
+        # Crie um dicionário para armazenar o número de médias maiores que 7 por candidato
+        num_medias = defaultdict(int)
+
+        # Itere sobre o resultado da consulta
+        for row in resultado:
+            if row.media >= 7.0:
+                num_medias[row.candidato] += 1
+
+        # Atualize os candidatos correspondentes na base de dados
+        for candidato, count in num_medias.items():
+            if count >= 3:
+                Candidato.objects.filter(nome=candidato).update(aprovado=True)
+                print(f'{candidato}: {count} --> Aprovado')
+            else:
+                Candidato.objects.filter(nome=candidato).update(aprovado=False)
+                print(f'{candidato}: {count} --> Reprovado')
