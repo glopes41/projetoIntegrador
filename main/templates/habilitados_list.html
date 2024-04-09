@@ -1,18 +1,17 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-Lista de Candidatos
+Candidatos Hbilitados
 {% endblock titulo%}
 
 {% block conteudo %}
 {% if aprovados %}
-<h2>Candidatos Cadastrados.</h2>
+<h2>Candidatos Habilitados.</h2>
 <table class="tabela">
     <thead>
         <tr>
             <th>id</th>
             <th>nome</th>
-            <th>aprovado</th>
             <th>habilitado</th>
         </tr>
     </thead>
@@ -21,7 +20,6 @@ Lista de Candidatos
         <tr>
             <th scope="row">{{ n.pk }}</th>
             <td>{{ n.nome }}</td>
-            <td>{{ n.aprovado }}</td>
             <td>{{ n.habilitado }}</td>
         </tr>
         {% endfor %}

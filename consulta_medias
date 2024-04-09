@@ -1,7 +1,7 @@
 SELECT 
     main_candidato.nome AS candidato,
     main_examinador.nome AS examinador,
-    SUM(main_avaliacao.nota * main_tipo.peso)/SUM(main_tipo.peso) AS media
+    CAST(SUM(main_avaliacao.nota * main_tipo.peso) AS FLOAT)/CAST(SUM(main_tipo.peso) AS FLOAT) AS media
 FROM 
     main_candidato
 JOIN 

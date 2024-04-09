@@ -31,7 +31,6 @@ class Examinador(models.Model):
 
 class Candidato(models.Model):
     nome = models.CharField(max_length=100, db_index=True, null=False, blank=False)
-    aprovado = models.BooleanField(null=True)
     habilitado = models.BooleanField(null=True)
 
     def __str__(self):

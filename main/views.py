@@ -141,8 +141,8 @@ class ConsultaMedias(ListView):
 
         return queryset
 
-class VerificaAprovadosList(ListView):
-    template_name = 'aprovados_list.html'
+class VerificaHabilitadosList(ListView):
+    template_name = 'habilitados_list.html'
     context_object_name = 'aprovados'
     model = Candidato
 
@@ -167,8 +167,8 @@ class VerificaAprovadosList(ListView):
         # Atualize os candidatos correspondentes na base de dados
         for candidato, count in num_medias.items():
             if count >= 3:
-                Candidato.objects.filter(nome=candidato).update(aprovado=True)
-                print(f'{candidato}: {count} --> Aprovado')
+                Candidato.objects.filter(nome=candidato).update(habilitado=True)
+                #print(f'{candidato}: {count} --> Aprovado')
             else:
-                Candidato.objects.filter(nome=candidato).update(aprovado=False)
-                print(f'{candidato}: {count} --> Reprovado')
+                Candidato.objects.filter(nome=candidato).update(habilitado=False)
+                #print(f'{candidato}: {count} --> Reprovado')
