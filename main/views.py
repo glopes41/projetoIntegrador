@@ -152,7 +152,6 @@ class VerificaHabilitadosList(ListView):
         return queryset
 
     def calcula_medias(self):
-        # Execute a consulta SQL
         consulta = ConsultaMedias()
         resultado = consulta.get_queryset()
 
@@ -161,7 +160,7 @@ class VerificaHabilitadosList(ListView):
 
         # Itere sobre o resultado da consulta
         for row in resultado:
-            if row.media >= 7.0:
+            if float(row.media) >= 7.0:
                 num_medias[row.candidato] += 1
 
         # Atualize os candidatos correspondentes na base de dados
