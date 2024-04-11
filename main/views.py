@@ -137,7 +137,7 @@ class ConsultaMedias(ListView):
                 main_examinador ON main_avaliacao_avaliacao.examinador_id = main_examinador.id
             GROUP BY 
                 main_candidato.nome, main_examinador.nome;
-        '''))     
+            '''))     
 
         return queryset
 
@@ -157,14 +157,18 @@ class VerificaHabilitadosList(ListView):
 
         # Crie um dicionário para armazenar o número de médias maiores que 7 por candidato
         num_medias = defaultdict(int)
-
         # Itere sobre o resultado da consulta
         for row in resultado:
+            #print(row.candidato, row.media)
             if float(row.media) >= 7.0:
+                #print("maior")
                 num_medias[row.candidato] += 1
+            else:
+                num_medias[row.candidato] = 0
 
         # Atualize os candidatos correspondentes na base de dados
         for candidato, count in num_medias.items():
+            #print(count)
             if count >= 3:
                 Candidato.objects.filter(nome=candidato).update(habilitado=True)
                 #print(f'{candidato}: {count} --> Aprovado')
