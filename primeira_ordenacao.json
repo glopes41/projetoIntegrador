@@ -1,0 +1,24 @@
+{
+    "Adriano": {
+        "Evandro": 9.1,
+        "Maria": 7.3,
+        "Pedro": 7.3
+    },
+    "Anete": {
+        "Evandro": 9.1,
+        "Maria": 8.6,
+        "Pedro": 7.1
+    },
+    "Luciano": {
+        "Evandro": 5.8
+    },
+    "Marcelo": {
+        "Maria": 9.0,
+        "Pedro": 8.0,
+        "Evandro": 6.0
+    },
+    "Thiago": {
+        "Maria": 7.7,
+        "Evandro": 6.0
+    }
+}

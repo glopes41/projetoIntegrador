@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Lista Classificação
+{% endblock titulo%}
+
+{% block conteudo %}
+{% if lista %}
+<h2>Lista de classificação.</h2>
+
+{% for examinador, candidatos in lista %}
+{{examinador}}
+<ul>
+    {% for candidato in candidatos %}
+    <li>{{ candidato }}</li>
+    {% endfor %}
+</ul>
+
+{% endfor %}
+
+{% else %}
+<h2>Não há candidatos cadastrados.</h2>
+{% endif %}
+{% endblock conteudo %}

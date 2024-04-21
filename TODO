@@ -1,0 +1,6 @@
+* Caluclo da media ponderada por prova e examinador - OK
+* Verificar candidatos habilitados, 3 medias maiores que 7 - OK
+* Ordenar candidatos por examinador - OK
+* Verificar se para algum examinador existem notas iguais - OK
+* Perguntar ao usuario como ordenar os candidatos - PENDENTE
+* Ordenar os candidatos conforme escolha do usuario - PENDENTE

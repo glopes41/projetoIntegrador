@@ -22,7 +22,7 @@ Médias
             <th scope="row">{{ n.pk }}</th>
             <td>{{ n.nome }}</td>
             <td>{{ n.examinador }}</td>
-            <td>{{ n.media | floatformat:2 }}</td>
+            <td>{{ n.media | floatformat:1 }}</td>
         </tr>
         {% endfor %}
     </tbody>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Lista de Candidatos
+
+{% endblock titulo%}
+
+{% block conteudo %}
+
+<form method="post">
+    {% csrf_token %}
+    {% for examinador, par in lista_empates %}
+    <h4>Examinador: {{ examinador }}</h4>
+    <ul>
+        {% for candidato in par %}
+        <li>
+            {{ candidato }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</form>
+
+{% endblock conteudo %}
