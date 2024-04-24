@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from .models import Candidato, Examinador, Tipo, Prova, Avaliacao, Concurso
 from .forms import FormAvaliacao
 from collections import defaultdict
+from django.shortcuts import render
 import json
 
 
@@ -159,7 +160,7 @@ class ConsultaMediasCandidatos(ListView):
             JOIN
                 main_examinador ON main_avaliacao_avaliacao.examinador_id = main_examinador.id
             GROUP BY
-                main_candidato.nome, main_examinador.nome;
+                main_candidato.nome, main_examinador.nome
             '''))
 
         return queryset
@@ -171,6 +172,9 @@ class ConsultaMediasCandidatos(ListView):
 class OrdenaMediasExaminador(ListView):
     template_name = 'classificacao_list.html'
     context_object_name = 'classificacao'
+
+    # Calcula as medias ponderadas de todos os candidatos e agrupa os candidatos por examinador
+    # A consulta ja sai com os candidatos ordenados por media decrescente
 
     def get_queryset(self):
         queryset = (Candidato.objects.raw('''
@@ -193,17 +197,23 @@ class OrdenaMediasExaminador(ListView):
                 main_examinador ON main_avaliacao_avaliacao.examinador_id = main_examinador.id
             GROUP BY
                 main_examinador.nome, main_candidato.nome
+            ORDER BY
+                main_examinador.nome, media DESC
             '''))
 
+        # Cria um dicionario com o resultado do SELECT do banco de dados
         resultados = defaultdict(dict)
         for row in queryset:
             resultados[row.examinador][row.candidato] = row.media
 
-        # Ordena os dicionarios internos por nota
+        # Ordena os dicionarios internos por media
+        '''
         for examinador, dicionario in resultados.items():
             resultados[examinador] = dict(
                 sorted(dicionario.items(), key=lambda item: item[1], reverse=True))
+        '''
 
+        # Salvamos o dicionario ordenado por medias em arquivo na pasta local
         with open('primeira_ordenacao.json', 'w') as json_file:
             json.dump(resultados, json_file, indent=4)
 
@@ -226,10 +236,9 @@ class VerificaEmpateCandidatos(TemplateView):
     dados = defaultdict()
 
     def __init__(self):
-        # print("ordenando.....")
+        # Carrega os candidatos ordenados por media de um arquivo na pasta local
         with open('primeira_ordenacao.json', 'r') as json_file:
             self.dados = json.load(json_file)
-        # print(self.dados)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -242,14 +251,16 @@ class VerificaEmpateCandidatos(TemplateView):
 
         return context
 
+    # Verifica se houve empate pelas medias entre candidatos do mesmo avaliador
     def verifica(self):
         pares_iguais = defaultdict(list)
 
-        # Laço externo
+        # Laço externo, para cada examinador
         for chave_externa, valor_externo in self.dados.items():
-            # Laço interno
+            # Laço interno, para cada candidato
             for chave_interna, valor_interno in valor_externo.items():
-                # Laço interno para cada item
+                # Laço interno para cada candidato novamente.
+                # Estamos comparando o dicionario com ele mesmo!
                 for chave, valor in valor_externo.items():
                     if valor_interno == valor and chave_interna != chave:
                         if not pares_iguais:  # dicionario vazio
@@ -261,17 +272,22 @@ class VerificaEmpateCandidatos(TemplateView):
                             if (chave) not in pares_iguais[chave_externa]:
                                 pares_iguais[chave_externa].append(
                                     chave)
-
+        # retorna um dicionario com os candidatos empatado por examinador.
+        #
+        #           Examinador      Candidatos       Examinador      Candidatos
+        # exemplo: { 'Andre': { 'Marcos', 'Valeria}, 'Marcelo': { 'Joao', 'Leticia' } }
         return pares_iguais
 
-    def exibe(self):
-        pares_iguais = self.verifica()
-        print("Empates por examinador:")
-        print(pares_iguais)
-        for chave_externa, pares in pares_iguais.items():
-            print(f"Examinador: '{chave_externa}':")
-            for par in pares:
-                print(f"  Candidatos: {par[0]} e {par[1]}")
+    # Pega o retorno do template empate.html onde o usuario escolheu o desempate.
+    def post(self, request, *args, **kwargs):
+        # Processar os dados do formulário
+        escolha_ordenacao = defaultdict(dict)
+        for chave, valor in request.POST.items():
+            lista = chave.split(',')
+            if len(lista) == 2:
+                escolha_ordenacao[lista[0]][lista[1]] = valor
+        print(f'Ordenção do usuario: {escolha_ordenacao}')
+        return render(request, 'index.html', {'mensagem': 'Ordem escolhida com sucesso!'})
 
 
 class VerificaHabilitadosList(ListView):
@@ -288,9 +304,9 @@ class VerificaHabilitadosList(ListView):
         consulta = ConsultaMediasCandidatos()
         resultado = consulta.get_queryset()
 
-        # Crie um dicionário para armazenar o número de médias maiores que 7 por candidato
+        # Cria um dicionário para armazenar o número de médias maiores que 7 por candidato
         num_medias = defaultdict(int)
-        # Itere sobre o resultado da consulta
+        # Itera sobre o resultado da consulta
         for row in resultado:
             # print(row.candidato, row.media)
             if float(row.media) >= 7.0:

@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-Lista de Candidatos
-
+Lista de Empatados
 {% endblock titulo%}
 
 {% block conteudo %}
@@ -11,14 +10,18 @@ Lista de Candidatos
     {% csrf_token %}
     {% for examinador, par in lista_empates %}
     <h4>Examinador: {{ examinador }}</h4>
-    <ul>
-        {% for candidato in par %}
-        <li>
-            {{ candidato }}
-        </li>
-        {% endfor %}
-    </ul>
+    {% for candidato in par %}
+    <table>
+        <tr>
+            <td><label>{{ candidato }}:</label></td>
+            <td><input type="text" id="{{ examinador }},{{ candidato }}" name="{{ examinador }},{{ candidato }}"
+                    value=""></td>
+        </tr>
+    </table>
     {% endfor %}
+    {% endfor %}
+    <p></p>
+    <input type="submit" value="Enviar">
 </form>
 
 {% endblock conteudo %}

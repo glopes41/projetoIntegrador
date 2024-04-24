@@ -22,14 +22,16 @@
 </head>
 
 <body>
-
-    {% include 'snippets/barraNavegacao.html' %}
-
-    {% block conteudo %}
-    {% endblock conteudo %}
-
-    {% include 'snippets/rodape.html' %}
-
+    <div class="container">
+        <div class="content">
+            {% include 'snippets/barraNavegacao.html' %}
+            {% block conteudo %}
+            {% endblock conteudo %}
+        </div>
+        <div class="rodape">
+            {% include 'snippets/rodape.html' %}
+        </div>
+    </div>
 </body>
 
 </html>

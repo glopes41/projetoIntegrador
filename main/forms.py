@@ -17,7 +17,7 @@ class FormAvaliacao(forms.ModelForm):
         concurso = Concurso.objects.first()
         # Obtendo os dados do formulário
         tipo_prova_descricao = self.cleaned_data['tipo_prova']
-
+        # Insere a data automaticamente
         instance.data = concurso.data
         # Verificando se a instância já tem uma prova associada
         if not instance.prova_id:
