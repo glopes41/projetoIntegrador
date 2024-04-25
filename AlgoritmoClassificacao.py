@@ -1,7 +1,7 @@
 # Para rodar o código, coloque como comentário as aspas triplas de abertura e fechamento dos testes abaixo
 
 
-"""
+#"""
                     #TESTE 1
 
 # substituir o valor da lista por um código genérico que gere uma lista dos candidatos habilitados
@@ -19,7 +19,7 @@ dicionario_ordenado = {
     'Examinador 4': ['Marcelo', 'Caio', 'Ana', 'Cléber'],
     'Examinador 5': ['Ana', 'Marcelo', 'Caio', 'Cléber']
 }
-"""
+#"""
 
 
 
@@ -68,8 +68,7 @@ dicionario_ordenado = {
 
 
 acumulador = 0
-#substituir o "4" por uma consulta genérico ao número de habilitados
-num_habilitados = 4 
+num_habilitados = len(candidatos_habilitados)
 empate_com_duas_indicacoes = []
 classificacao_final = {}
 
@@ -77,9 +76,9 @@ for posicao in range(num_habilitados):
     for candidato in candidatos_habilitados:
 
         for chave, valores in dicionario_ordenado.items():
-            if valores:  
-                if candidato == valores[0]:
-                    acumulador += 1
+            if candidato == valores[0]:
+                acumulador += 1
+            
 
         if acumulador >= 3:
             #adiciona ao dicionário de classificação final o candidato classificado e o nº de indicações
