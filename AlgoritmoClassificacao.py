@@ -128,10 +128,40 @@ for posicao in range(num_habilitados):
         #zera a lista de empate
         empate_com_duas_indicacoes = []
 
-        # DEPOIS SERÁ PRECISO COLOCAR:
-    #colocar o desempate pela média da prova didática
-    #se continuar empatado, colocar o desempate pela média da prova de títulos
-    #se continuar empatado, colocar o desempate por escolha do usuário. MAS ISSO NÃO É NECESSÁRIO INICIALMENTE. QUASE IMPOSSÍVEL ACONTECER.
+        #PRÉVIA DO CÓDIGO DEFINITIVO
+        '''
+        # pressuposto: haver outro atributo da entidade 'prova', que é a 'precedência' para fins de desempate (int: 0,1,...), cadastrada junto com o tipo e o peso
+        
+        provas_para_desempate = 'fazer um list de strings com o nome das provas com o atributo precedência diferente de 0, ordenadas segundo o número da precedência'
+        #iteração sobre as provas
+        for prova in provas_para_desempate:
+            #aqui se faz um SELECT para calcular a media artimetica na prova da iteração atual
+            #formula desta media: (nota do examinador 1 + ... + nota do examiandor 5)/5
+            #coloca-se a media no dicionário abaixo
+            #lembrando que a lista 'empate_com_duas_indicacoes' contém os empatados
+            media = {empate_com_duas_indicacoes[0]: SELECT da media1, empate_com_duas_indicacoes[1]: SELECT da media2}
+            
+            # Verifica se a media atual já desempata
+            if media[empate_com_duas_indicacoes[0]] != media[empate_com_duas_indicacoes[1]]:
+                # Ordena os empatados pela maior media na prova da iteração atual
+                empate_com_duas_indicacoes.sort(key=lambda x: media[x], reverse=True)
+                 #coloca o primeiro como o próximo na classificação
+                classificacao_final[empate_com_duas_indicacoes[0]] = 2
+                #retira das listas de habilitados o candidato classificado
+                for chave, valores in dicionario_ordenado.items():
+                    if empate_com_duas_indicacoes[0] in valores:
+                        valores.remove(empate_com_duas_indicacoes[0])
+                #zera a lista de empate
+                empate_com_duas_indicacoes = []
+                break
+        
+        #se nenhuma prova desempatou, vai para a escolha do usuário. Aqui viria esse código
+        #if len(empate_com_duas_indicacoes) != 0:
+            #colocar aqui a escolha do usuário
+            
+        '''
+
+        
     
 
     #verifica se todos os candidatos empataram com 1 indicação
@@ -153,10 +183,39 @@ for posicao in range(num_habilitados):
             break        
         
     
-        # DEPOIS SERÁ PRECISO COLOCAR:
-    #colocar o desempate pela média da prova didática
-    #se continuar empatado, colocar o desempate pela média da prova de títulos
-    #se continuar empatado, colocar o desempate por escolha do usuário. MAS ISSO NÃO É NECESSÁRIO INICIALMENTE. QUASE IMPOSSÍVEL ACONTECER.
+       #PRÉVIA DO CÓDIGO DEFINITIVO
+       
+        '''
+        # pressuposto: haver outro atributo da entidade 'prova', que é a 'precedência' para fins de desempate (int: 0,1,...), cadastrada junto com o tipo e o peso
+        
+        provas_para_desempate = 'fazer um list de strings com o nome das provas com o atributo precedência diferente de 0, ordenadas segundo o número da precedência'
+        #iteração sobre as provas
+        for prova in provas_para_desempate:
+            #aqui se faz um SELECT para calcular a media artimetica na prova da iteração atual
+            #formula desta media: (nota do examinador 1 + ... + nota do examiandor 5)/5
+            #coloca-se a media no dicionário abaixo
+            #lembrando que a lista 'empate_com_duas_indicacoes' contém os empatados
+            media = {empate_com_duas_indicacoes[0]: SELECT da media1, empate_com_duas_indicacoes[1]: SELECT da media2}
+            
+            # Verifica se a media atual já desempata
+            if media[empate_com_duas_indicacoes[0]] != media[empate_com_duas_indicacoes[1]]:
+                # Ordena os empatados pela maior media na prova da iteração atual
+                empate_com_duas_indicacoes.sort(key=lambda x: media[x], reverse=True)
+                 #coloca o primeiro como o próximo na classificação
+                classificacao_final[empate_com_duas_indicacoes[0]] = 2
+                #retira das listas de habilitados o candidato classificado
+                for chave, valores in dicionario_ordenado.items():
+                    if empate_com_duas_indicacoes[0] in valores:
+                        valores.remove(empate_com_duas_indicacoes[0])
+                #zera a lista de empate
+                empate_com_duas_indicacoes = []
+                break
+        
+        #se nenhuma prova desempatou, vai para a escolha do usuário. Aqui viria esse código
+        #if len(empate_com_duas_indicacoes) != 0:
+            #colocar aqui a escolha do usuário
+            
+        '''
 
         
 print(classificacao_final)
