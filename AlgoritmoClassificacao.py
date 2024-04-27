@@ -1,15 +1,18 @@
-# Para rodar o código, coloque como comentário as aspas triplas de abertura e fechamento dos testes abaixo
+
+def calcula_classificacao_final():
+
+    # Para rodar o código, coloque como comentário as aspas triplas de abertura e fechamento dos testes abaixo
 
 
-"""
-                    #TESTE 1
+    """
+                        #TESTE 1
 
-# substituir o valor da lista por um código genérico que gere uma lista dos candidatos habilitados
-candidatos_habilitados = ['Ana',
-                          'Cléber',
-                          'Caio',
-                          'Marcelo'
-                          ] 
+    # substituir o valor da lista por um código genérico que gere uma lista dos candidatos habilitados
+    candidatos_habilitados = ['Ana',
+                            'Cléber',
+                            'Caio',
+                            'Marcelo'
+                            ] 
 
 # substituir o valor destes dicts por um código genérico que os gere a partir dos dados do concurso
 dicionario_ordenado = {
@@ -22,15 +25,15 @@ dicionario_ordenado = {
 """
 
 
-"""
-                    #TESTE 2
+    """
+                        #TESTE 2
 
-# substituir o valor da lista por um código genérico que gere uma lista dos candidatos habilitados
-candidatos_habilitados = ['Ana',
-                          'Marcelo',
-                          'Caio',
-                          'Cléber'
-                          ] 
+    # substituir o valor da lista por um código genérico que gere uma lista dos candidatos habilitados
+    candidatos_habilitados = ['Ana',
+                            'Marcelo',
+                            'Caio',
+                            'Cléber'
+                            ] 
 
 # substituir o valor destes dicts por um código genérico que os gere a partir dos dados do concurso
 dicionario_ordenado = {
@@ -43,26 +46,26 @@ dicionario_ordenado = {
 """
 
 
-"""
-                    #TESTE 3 - TROCAR num_habilitados PARA 5
+    """
+                        #TESTE 3 - TROCAR num_habilitados PARA 5
 
-# substituir o valor da lista por um código genérico que gere uma lista dos candidatos habilitados
-candidatos_habilitados = ['Ana',
-                          'Cléber',
-                          'Caio',
-                         'Mateus',
-                          'Marcelo'
-                          ] 
+    # substituir o valor da lista por um código genérico que gere uma lista dos candidatos habilitados
+    candidatos_habilitados = ['Ana',
+                            'Cléber',
+                            'Caio',
+                            'Mateus',
+                            'Marcelo'
+                            ] 
 
-# substituir o valor destes dicts por um código genérico que os gere a partir dos dados do concurso
-dicionario_ordenado = {
-    'Examinador 1': ['Ana', 'Marcelo', 'Caio', 'Cléber','Mateus'],
-    'Examinador 2': ['Cléber', 'Marcelo', 'Caio', 'Ana','Mateus'],
-    'Examinador 3': ['Caio', 'Ana', 'Marcelo', 'Cléber','Mateus'],
-    'Examinador 4': ['Marcelo', 'Caio', 'Ana', 'Cléber','Mateus'],
-    'Examinador 5': ['Mateus','Ana', 'Marcelo', 'Caio', 'Cléber']
-}
-"""
+    # substituir o valor destes dicts por um código genérico que os gere a partir dos dados do concurso
+    dicionario_ordenado = {
+        'Examinador 1': ['Ana', 'Marcelo', 'Caio', 'Cléber','Mateus'],
+        'Examinador 2': ['Cléber', 'Marcelo', 'Caio', 'Ana','Mateus'],
+        'Examinador 3': ['Caio', 'Ana', 'Marcelo', 'Cléber','Mateus'],
+        'Examinador 4': ['Marcelo', 'Caio', 'Ana', 'Cléber','Mateus'],
+        'Examinador 5': ['Mateus','Ana', 'Marcelo', 'Caio', 'Cléber']
+    }
+    """
 
 
 acumulador = 0
@@ -71,13 +74,14 @@ num_habilitados = 4
 empate_com_duas_indicacoes = []
 classificacao_final = {}
 
-for posicao in range(num_habilitados):
-    for candidato in candidatos_habilitados:
+    for posicao in range(num_habilitados):
+        for candidato in candidatos_habilitados:
 
         for chave, valores in dicionario_ordenado.items():
             if valores:
                 if candidato == valores[0]:
                     acumulador += 1
+                
 
         if acumulador >= 3:
             # adiciona ao dicionário de classificação final o candidato classificado e o nº de indicações
