@@ -8,27 +8,17 @@ Lista de Empatados
 
 <form method="post">
     {% csrf_token %}
-    {% for examinador, empates in dados.items %}
-
+    {% for examinador, par in lista_empates %}
     <h4>Examinador: {{ examinador }}</h4>
+    {% for candidato in par %}
     <table>
-        {% for empate_num, candidatos in empates.items %}
-        <tr>
-            <td>{{empate_num}}:</td>
-        </tr>
-        {% for candidato in candidatos %}
         <tr>
             <td><label>{{ candidato }}:</label></td>
-            <td><input type="text" name="{{ examinador }},{{empate_num}},{{ candidato }}" value=""></td>
+            <td><input type="text" id="{{ examinador }},{{ candidato }}" name="{{ examinador }},{{ candidato }}"
+                    value=""></td>
         </tr>
-        {% endfor %}
-        <tr>
-            <td>
-                <p></p>
-            </td>
-        </tr>
-        {% endfor %}
     </table>
+    {% endfor %}
     {% endfor %}
     <p></p>
     <input type="submit" value="Enviar">
