@@ -290,36 +290,67 @@ class VerificaEmpateCandidatos(TemplateView):
 
     def post(self, request, *args, **kwargs):
         # Processar os dados do formulário
-        escolha_ordenacao = {}
+        escolha_usuario = {}
         candidatos = defaultdict(dict)
         conj = set()
+
+        # Pegamos o retorno do usuario e criamos um dicionario
         for chave, valor in request.POST.items():
             # print(chave, valor)
             lista = chave.split(',')
             if len(lista) > 2:
                 examinador, empate, candidato = lista
-                print(examinador, empate, candidato)
-                if examinador not in escolha_ordenacao:
-                    escolha_ordenacao[examinador] = {}
-                if empate not in escolha_ordenacao[examinador]:
-                    escolha_ordenacao[examinador][empate] = {}
-                escolha_ordenacao[examinador][empate][candidato] = valor
+                #print(examinador, empate, candidato)
+                if examinador not in escolha_usuario:
+                    escolha_usuario[examinador] = {}
+                if empate not in escolha_usuario[examinador]:
+                    escolha_usuario[examinador][empate] = {}
+                escolha_usuario[examinador][empate][candidato] = valor
+        print("Retorno do usuario como dicionario:", escolha_usuario)
 
-        print("Resultado:", escolha_ordenacao)
-        dicionario_maior = self.dados
-        reordenado = {}
-        for examinador, empates in escolha_ordenacao.items():
+        # Aqui ordenamos os candidatos conforme escolha do usuario em ordem crescente
+        for examinador, empates in escolha_usuario.items():
             for empate, candidatos in empates.items():
-                # print(empate)
-                ordenado = {chave: valor for chave, valor in sorted(
+                escolha_usuario[examinador][empate] = {chave: valor for chave, valor in sorted(
                     candidatos.items(), key=lambda item: int(item[1]))}
-                print(ordenado)
-            reordenado[examinador] = {}
-            print("Examinador: ", dicionario_maior[examinador])
-            for candidato in dicionario_maior[examinador].items():
-                print(candidato)
+        print("Escolha do usuario ordenada: ", escolha_usuario)
 
-        return render(request, 'index.html', {'mensagem': 'Ordem escolhida com sucesso!'})
+        # Para cada examinador do dicionario de empates pegar os empates
+        dic_original = self.dados
+        dic_ordenado = {}
+        for examinador, empates in escolha_usuario.items():
+            #print(examinador)
+            # Para cada empate, substituir os candidatos na ordem correta no dicionario original
+            dic_candidatos = {}
+            for empate, candidatos in empates.items():
+                for candidato, nota in dic_original[examinador].items():
+                    if candidato not in candidatos:
+                        dic_candidatos[candidato] = nota
+                    else:
+                        dic_candidatos.update(candidatos)
+                        break;
+                #print("aux: ", dic_candidatos)
+                #print(empate, candidatos)
+            dic_ordenado[examinador] = dic_candidatos
+            #print(dic_ordenado)
+            #print(self.dados)
+        
+        # Garante a atualização das notas
+        for examinador, candidatos in self.dados.items():
+            if examinador not in dic_ordenado:
+                dic_ordenado[examinador] = {}
+            for candidato, nota in candidatos.items():
+                #print(candidato, nota)
+                dic_ordenado[examinador][candidato] = nota
+        
+        # Salvamos o dicionario ordenado em um arquivo
+        with open('ordenacao_final.json', 'w') as json_file:
+            json.dump(dic_ordenado, json_file, indent=4)
+        #print("final: ", dic_ordenado)
+
+            
+
+        return render(request, 'escolha_usuario_sucesso.html', {'mensagem': 'Ordem dos candidatos escolhida com sucesso!'})
 
 
 class VerificaHabilitadosList(ListView):
