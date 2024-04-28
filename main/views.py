@@ -243,50 +243,82 @@ class VerificaEmpateCandidatos(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        lista_original = self.verifica()
-        empates = []
-        for examinador, pares in lista_original.items():
-            empates.append((examinador, pares))
-        context['lista_empates'] = empates
+        lista = self.verifica()
+        dicionarios_vazios = []
+        for chave, valor in lista.items():
+            if not valor:
+                dicionarios_vazios.append(chave)
+        for chave in dicionarios_vazios:
+            lista.pop(chave)
+        context['dados'] = lista
+        print(context)
 
         return context
 
-    # Verifica se houve empate pelas medias entre candidatos do mesmo avaliador
     def verifica(self):
-        pares_iguais = defaultdict(list)
+        empates = {}
 
-        # Laço externo, para cada examinador
+        # Laço externo, Examinadores:
+        # caso 1: empate unico { "Adriano": { "Evandro": 8.9, "Pedro": 7.3, "Maria": 7.3 } }
+        # caso 2: varios empates { "Adriano": { "Evandro": 8.9, "Pedro": 7.3, "Maria": 7.3, "Jorge": 6.0, "Tiago": 6.0 } }
         for chave_externa, valor_externo in self.dados.items():
-            # Laço interno, para cada candidato
+            # Laço interno, Candidatos: { "Evandro": 8.9, "Pedro": 7.3, "Maria": 7.3 }
+            empates[chave_externa] = {}
+            n = 1
+            empates_encontrados = set()
             for chave_interna, valor_interno in valor_externo.items():
-                # Laço interno para cada candidato novamente.
-                # Estamos comparando o dicionario com ele mesmo!
+                # Laço interno para cada item
+                # Conjunto do python para nao permitir elementos repetidos
+                nomes_empatados = set([chave_interna])
                 for chave, valor in valor_externo.items():
                     if valor_interno == valor and chave_interna != chave:
-                        if not pares_iguais:  # dicionario vazio
-                            if (chave) and (chave_interna) not in pares_iguais[chave_externa]:
-                                pares_iguais[chave_externa].append(
-                                    chave_interna)
-                                pares_iguais[chave_externa].append(chave)
-                        else:
-                            if (chave) not in pares_iguais[chave_externa]:
-                                pares_iguais[chave_externa].append(
-                                    chave)
-        # retorna um dicionario com os candidatos empatado por examinador.
-        #
-        #           Examinador      Candidatos       Examinador      Candidatos
-        # exemplo: { 'Andre': { 'Marcos', 'Valeria}, 'Marcelo': { 'Joao', 'Leticia' } }
-        return pares_iguais
+                        if chave not in nomes_empatados:
+                            nomes_empatados.add(chave)
+                if len(nomes_empatados) > 1:
+                    if tuple(sorted(nomes_empatados)) not in empates_encontrados:
+                        empates_encontrados.add(
+                            tuple(sorted(nomes_empatados)))
+                        # Use n como chave para cada conjunto de empates
+                        empates[chave_externa][f'empate_{n}'] = sorted(
+                            list(nomes_empatados))
+                        n += 1
+                # print(empates)
+
+        return empates
 
     # Pega o retorno do template empate.html onde o usuario escolheu o desempate.
+
     def post(self, request, *args, **kwargs):
         # Processar os dados do formulário
-        escolha_ordenacao = defaultdict(dict)
+        escolha_ordenacao = {}
+        candidatos = defaultdict(dict)
+        conj = set()
         for chave, valor in request.POST.items():
+            # print(chave, valor)
             lista = chave.split(',')
-            if len(lista) == 2:
-                escolha_ordenacao[lista[0]][lista[1]] = valor
-        print(f'Ordenção do usuario: {escolha_ordenacao}')
+            if len(lista) > 2:
+                examinador, empate, candidato = lista
+                print(examinador, empate, candidato)
+                if examinador not in escolha_ordenacao:
+                    escolha_ordenacao[examinador] = {}
+                if empate not in escolha_ordenacao[examinador]:
+                    escolha_ordenacao[examinador][empate] = {}
+                escolha_ordenacao[examinador][empate][candidato] = valor
+
+        print("Resultado:", escolha_ordenacao)
+        dicionario_maior = self.dados
+        reordenado = {}
+        for examinador, empates in escolha_ordenacao.items():
+            for empate, candidatos in empates.items():
+                # print(empate)
+                ordenado = {chave: valor for chave, valor in sorted(
+                    candidatos.items(), key=lambda item: int(item[1]))}
+                print(ordenado)
+            reordenado[examinador] = {}
+            print("Examinador: ", dicionario_maior[examinador])
+            for candidato in dicionario_maior[examinador].items():
+                print(candidato)
+
         return render(request, 'index.html', {'mensagem': 'Ordem escolhida com sucesso!'})
 
 
