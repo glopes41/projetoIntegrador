@@ -5,7 +5,7 @@ Lista de Empatados
 {% endblock titulo%}
 
 {% block conteudo %}
-
+{% if dados %}
 <form method="post">
     {% csrf_token %}
     {% for examinador, empates in dados.items %}
@@ -33,5 +33,11 @@ Lista de Empatados
     <p></p>
     <input type="submit" value="Enviar">
 </form>
-
+{% else %}
+<h3>Não há empates</h3>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Retornar">
+</form>
+{% endif %}
 {% endblock conteudo %}
