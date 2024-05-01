@@ -1,24 +1,32 @@
 {
     "Adriano": {
-        "Evandro": 8.9,
-        "Maria": 7.3,
-        "Pedro": 7.3
-    },
-    "Marcelo": {
-        "Maria": 9.0,
-        "Evandro": 9.0,
-        "Pedro": 8.0
+        "Luana": 8.3,
+        "Maria": 8.2,
+        "Josu\u00e9": 8.0,
+        "Evandro": 5.7
     },
     "Anete": {
-        "Evandro": 7.4,
-        "Maria": 7.1,
-        "Pedro": 6.2
+        "Luana": 8.4,
+        "Maria": 7.9,
+        "Josu\u00e9": 7.4,
+        "Evandro": 5.7
     },
     "Luciano": {
-        "Evandro": 5.8
+        "Maria": 8.4,
+        "Luana": 8.1,
+        "Josu\u00e9": 7.9,
+        "Evandro": 5.4
+    },
+    "Marcelo": {
+        "Maria": 8.5,
+        "Luana": 8.1,
+        "Josu\u00e9": 7.9,
+        "Evandro": 5.6
     },
     "Thiago": {
-        "Evandro": 9.0,
-        "Maria": 7.7
+        "Luana": 8.3,
+        "Maria": 8.2,
+        "Josu\u00e9": 7.9,
+        "Evandro": 5.6
     }
 }
