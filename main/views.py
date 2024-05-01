@@ -206,13 +206,6 @@ class OrdenaMediasExaminador(ListView):
         for row in queryset:
             resultados[row.examinador][row.candidato] = row.media
 
-        # Ordena os dicionarios internos por media
-        '''
-        for examinador, dicionario in resultados.items():
-            resultados[examinador] = dict(
-                sorted(dicionario.items(), key=lambda item: item[1], reverse=True))
-        '''
-
         # Salvamos o dicionario ordenado por medias em arquivo na pasta local
         with open('primeira_ordenacao.json', 'w') as json_file:
             json.dump(resultados, json_file, indent=4)
@@ -300,7 +293,7 @@ class VerificaEmpateCandidatos(TemplateView):
             lista = chave.split(',')
             if len(lista) > 2:
                 examinador, empate, candidato = lista
-                #print(examinador, empate, candidato)
+                # print(examinador, empate, candidato)
                 if examinador not in escolha_usuario:
                     escolha_usuario[examinador] = {}
                 if empate not in escolha_usuario[examinador]:
@@ -319,7 +312,7 @@ class VerificaEmpateCandidatos(TemplateView):
         dic_original = self.dados
         dic_ordenado = {}
         for examinador, empates in escolha_usuario.items():
-            #print(examinador)
+            # print(examinador)
             # Para cada empate, substituir os candidatos na ordem correta no dicionario original
             dic_candidatos = {}
             for empate, candidatos in empates.items():
@@ -328,29 +321,203 @@ class VerificaEmpateCandidatos(TemplateView):
                         dic_candidatos[candidato] = nota
                     else:
                         dic_candidatos.update(candidatos)
-                        break;
-                #print("aux: ", dic_candidatos)
-                #print(empate, candidatos)
+                        break
+                # print("aux: ", dic_candidatos)
+                # print(empate, candidatos)
             dic_ordenado[examinador] = dic_candidatos
-            #print(dic_ordenado)
-            #print(self.dados)
-        
+            # print(dic_ordenado)
+            # print(self.dados)
+
         # Garante a atualização das notas
         for examinador, candidatos in self.dados.items():
             if examinador not in dic_ordenado:
                 dic_ordenado[examinador] = {}
             for candidato, nota in candidatos.items():
-                #print(candidato, nota)
+                # print(candidato, nota)
                 dic_ordenado[examinador][candidato] = nota
-        
+
         # Salvamos o dicionario ordenado em um arquivo
         with open('ordenacao_final.json', 'w') as json_file:
             json.dump(dic_ordenado, json_file, indent=4)
-        #print("final: ", dic_ordenado)
-
-            
+        # print("final: ", dic_ordenado)
 
         return render(request, 'escolha_usuario_sucesso.html', {'mensagem': 'Ordem dos candidatos escolhida com sucesso!'})
+
+# Classe para a classificação final dos candidatos
+
+
+class ClassificacaoFinalList(ListView):
+    template_name = 'classificacao_final_list.html'
+    model = Candidato
+    num_habilitados = 0
+    candidatos_habilitados = []
+    dicionario_ordenado = {}
+
+    def __init__(self):
+        self.num_habilitados = Candidato.objects.filter(
+            habilitado=True).count()
+        candidatos_habilitados = Candidato.objects.filter(habilitado=True)
+        for candidato in candidatos_habilitados:
+            self.candidatos_habilitados.append(candidato.nome)
+
+        with open('ordenacao_final.json', 'r') as arq:
+            ordenados = json.load(arq)
+
+        self.dicionario_ordenado = {chave: list(valores.keys())
+                                    for chave, valores in ordenados.items()}
+        self.calcula_classificacao_final()
+
+    def calcula_classificacao_final(self):
+        acumulador = 0
+        empate_com_duas_indicacoes = []
+        classificacao_final = {}
+
+        print("num_habilitados: ", self.num_habilitados)
+        for posicao in range(self.num_habilitados):
+            for candidato in self.candidatos_habilitados:
+                print(self.dicionario_ordenado)
+                for chave, valores in self.dicionario_ordenado.items():
+                    # ERRO!!! --> "list index out of range"
+                    # Aqui da um erro na situação de ter um examinador sem candidatos, o que ocorre durante a execução do loop.
+                    if candidato == valores[0]:
+                        acumulador += 1
+
+                if acumulador >= 3:
+                    # adiciona ao dicionário de classificação final o candidato classificado e o nº de indicações
+                    classificacao_final[candidato] = acumulador
+                    # reinicia o acumulador para contagem das indicações da próxima posição
+                    acumulador = 0
+                    # zera duas indicações que possam ter acontecido antes da classificação do 1º colocado, para não cair no 'len(empate_com_duas_indicacoes) == 1'
+                    empate_com_duas_indicacoes = []
+                    # retira das listas de habilitados o candidato já classificado
+                    for chave, valores in self.dicionario_ordenado.items():
+                        if candidato in valores:
+                            valores.remove(candidato)
+                    break
+
+                # se houver 2 indicações, ainda é necessário iterar os candidatos até o fim, para ver se não há outro com 2 indicações
+                if acumulador == 2:
+                    empate_com_duas_indicacoes.append(candidato)
+                    acumulador = 0
+
+                # zera o acumulador para a próxima iteração, caso o candidato tenha uma única indicação e, assim, não entre em nenhum 'if' anterior
+                if acumulador == 1:
+                    acumulador = 0
+
+            # caso ninguém tenha vencido com 3 indicações, verifica se há uma só pessoa com 2 indicações, a qual venceria os outros cada um com apenas 1 indicação
+            if len(empate_com_duas_indicacoes) == 1:
+                # adiciona ao dicionário de classificação final o candidato classificado com 2 indicações
+                classificacao_final[empate_com_duas_indicacoes[0]] = 2
+                # retira das listas de habilitados o candidato já classificado
+                for chave, valores in self.dicionario_ordenado.items():
+                    if empate_com_duas_indicacoes[0] in valores:
+                        valores.remove(empate_com_duas_indicacoes[0])
+
+            # verifica se houve empate de indicações
+            if len(empate_com_duas_indicacoes) == 2:
+
+                # CÓDIGO PROVISÓRIO!!!!
+
+                # coloca o primeiro que teve 2 indicações como o próximo na classificação
+                classificacao_final[empate_com_duas_indicacoes[0]] = 2
+                # retira das listas de habilitados o candidato classificado
+                for chave, valores in self.dicionario_ordenado.items():
+                    if empate_com_duas_indicacoes[0] in valores:
+                        valores.remove(empate_com_duas_indicacoes[0])
+                # zera a lista de empate
+                empate_com_duas_indicacoes = []
+
+                # PRÉVIA DO CÓDIGO DEFINITIVO
+                '''
+                # pressuposto: haver outro atributo da entidade 'prova', que é a 'precedência' para fins de desempate (int: 0,1,...), cadastrada junto com o tipo e o peso
+                
+                provas_para_desempate = 'fazer um list de strings com o nome das provas com o atributo precedência diferente de 0, ordenadas segundo o número da precedência'
+                #iteração sobre as provas
+                for prova in provas_para_desempate:
+                    #aqui se faz um SELECT para calcular a media aritmetica na prova da iteração atual
+                    #formula desta media: (nota do examinador 1 + ... + nota do examiandor 5)/5
+                    #coloca-se a media no dicionário abaixo
+                    #lembrando que a lista 'empate_com_duas_indicacoes' contém os 2 empatados
+                    media = {empate_com_duas_indicacoes[0]: SELECT da media1, empate_com_duas_indicacoes[1]: SELECT da media2}
+                    
+                    # Verifica se a media atual já desempata
+                    if media[empate_com_duas_indicacoes[0]] != media[empate_com_duas_indicacoes[1]]:
+                        # Ordena os empatados pela maior media na prova da iteração atual
+                        empate_com_duas_indicacoes.sort(key=lambda x: media[x], reverse=True)
+                        #coloca o primeiro como o próximo na classificação
+                        classificacao_final[empate_com_duas_indicacoes[0]] = 2
+                        #retira das listas de habilitados o candidato classificado
+                        for chave, valores in dicionario_ordenado.items():
+                            if empate_com_duas_indicacoes[0] in valores:
+                                valores.remove(empate_com_duas_indicacoes[0])
+                        #zera a lista de empate
+                        empate_com_duas_indicacoes = []
+                        break #isto para parar de percorrer as provas, visto que o desempate acabou
+                
+                #se nenhuma prova desempatou, vai para a escolha do usuário. Aqui viria esse código
+                #if len(empate_com_duas_indicacoes) != 0:
+                    #colocar aqui a escolha do usuário
+                    
+                '''
+
+            # verifica se todos os candidatos empataram com 1 indicação
+            if len(classificacao_final) == posicao:
+                # CÓDIGO PROVISÓRIO!!!!
+
+                # coloca qualquer um na classificação
+                for candidato in self.candidatos_habilitados:
+
+                    for chave, valores in self.dicionario_ordenado.items():
+                        if valores:
+                            if candidato == valores[0]:
+                                classificacao_final[candidato] = 1
+                                break
+
+                    for chave, valores in self.dicionario_ordenado.items():
+                        if candidato in valores:
+                            valores.remove(candidato)
+                    break
+
+            # PRÉVIA DO CÓDIGO DEFINITIVO
+
+                '''
+                # pressuposto: haver outro atributo da entidade 'prova', que é a 'precedência' para fins de desempate (int: 0,1,...), cadastrada junto com o tipo e o peso
+                
+                provas_para_desempate = 'fazer um list de strings com o nome das provas com o atributo precedência diferente de 0, ordenadas segundo o número da precedência'
+                #iteração sobre as provas
+                for prova in provas_para_desempate:
+                    if len(classificacao_final) == posicao: #isto para não iterar, caso a classificação saia aqui dentro 
+                        #aqui se faz um SELECT para calcular a media artimetica na prova da iteração atual
+                        #formula desta media: (nota do examinador 1 + ... + nota do examiandor 5)/5
+                        #coloca-se a media no dicionário abaixo
+                        media = {}
+                        for candidato in candidatos_habilitados:
+                            media[candidato] = #media do candidato
+                        
+                        # Verifica se a media atual já desempata
+                        for candidato in candidatos_habilitados:
+                            vence_todos = True
+                            for outro_candidato in candidatos_habilitados:
+                                if candidato != outro_candidato and media[candidato] <= media[outro_candidato]:
+                                    vence_todos = False
+                                    break
+                            if vence_todos:
+                                classificacao_final[candidato] = 1
+                                #retira das listas de habilitados o candidato classificado
+                                for chave, valores in dicionario_ordenado.items():
+                                    if candidato in valores:
+                                        valores.remove(candidato)
+                                break                            
+                        
+                #se nenhuma prova desempatou, vai para a escolha do usuário. Aqui viria esse código
+                #if len(classificacao_final) == posicao:
+                    #colocar aqui a escolha do usuário
+                    
+                '''
+
+        for lugar, (candidato, indicacoes) in enumerate(classificacao_final.items(), start=1):
+            print(
+                f"{candidato} foi habilitado(a), em {lugar}º lugar, com {indicacoes} indicações.")
 
 
 class VerificaHabilitadosList(ListView):
@@ -371,12 +538,14 @@ class VerificaHabilitadosList(ListView):
         num_medias = defaultdict(int)
         # Itera sobre o resultado da consulta
         for row in resultado:
-            # print(row.candidato, row.media)
-            if float(row.media) >= 7.0:
+            print(row.candidato, row.media)
+            if float(row.media) >= float(7):
                 # print("maior")
                 num_medias[row.candidato] += 1
             else:
-                num_medias[row.candidato] = 0
+                if row.candidato not in num_medias:
+                    num_medias[row.candidato] = 0
+        print("num_medias: ", num_medias)
 
         # Atualize os candidatos correspondentes na base de dados
         for candidato, count in num_medias.items():
@@ -384,11 +553,11 @@ class VerificaHabilitadosList(ListView):
             if count >= 3:
                 Candidato.objects.filter(
                     nome=candidato).update(habilitado=True)
-                # print(f'{candidato}: {count} --> Aprovado')
+                print(f'{candidato}: {count} --> Aprovado')
             else:
                 Candidato.objects.filter(
                     nome=candidato).update(habilitado=False)
-                # print(f'{candidato}: {count} --> Reprovado')
+                print(f'{candidato}: {count} --> Reprovado')
 
         # Estruturar os resultados em um dicionário para exibição
         resultados = defaultdict(dict)

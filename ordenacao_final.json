@@ -1,42 +1,24 @@
 {
-    "Alexandre": {
-        "Cecilia": 9.3,
-        "R. Torquato": 9.1,
-        "Jose": 8.6,
-        "Plinio": 8.6,
-        "Luciano": 8.6,
-        "R. Augusto": 7.7
+    "Adriano": {
+        "Evandro": 8.9,
+        "Maria": 7.3,
+        "Pedro": 7.3
     },
-    "Andr\u00e9": {
-        "Cecilia": 9.4,
-        "R. Torquato": 8.9,
-        "Plinio": 8.8,
-        "Jose": 8.8,
-        "Luciano": 8.3,
-        "R. Augusto": 7.8
+    "Marcelo": {
+        "Maria": 9.0,
+        "Evandro": 9.0,
+        "Pedro": 8.0
     },
-    "Christiano": {
-        "Plinio": 9.4,
-        "R. Torquato": 9.4,
-        "Cecilia": 9.2,
-        "Jose": 9.0,
-        "Luciano": 8.8,
-        "R. Augusto": 8.4
+    "Anete": {
+        "Evandro": 7.4,
+        "Maria": 7.1,
+        "Pedro": 6.2
     },
-    "Renato": {
-        "Plinio": 9.3,
-        "Cecilia": 9.3,
-        "R. Torquato": 9.3,
-        "Luciano": 8.9,
-        "Jose": 8.8,
-        "R. Augusto": 8.4
+    "Luciano": {
+        "Evandro": 5.8
     },
-    "Denizar": {
-        "Cecilia": 9.6,
-        "Jose": 9.3,
-        "R. Torquato": 9.2,
-        "Plinio": 8.8,
-        "Luciano": 8.7,
-        "R. Augusto": 8.3
+    "Thiago": {
+        "Evandro": 9.0,
+        "Maria": 7.7
     }
 }
