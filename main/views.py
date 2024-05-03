@@ -163,7 +163,8 @@ class ConsultaMediasCandidatos(ListView):
             GROUP BY
                 main_candidato.nome, main_examinador.nome
             '''))
-
+        for linha in queryset:
+            print(linha.candidato, linha.examinador, linha.media)
         return queryset
 
 

@@ -10,6 +10,16 @@ html {
   text-align: center;
 }
 
+.titulo_principal {
+  text-align: center;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.titulo_colorido {
+  background-color: #ced9e4;
+}
+
 .container {
   min-height: 100%;
   position: relative;
@@ -79,9 +89,23 @@ table {
   margin: auto;
 }
 
+.tabela_reduzida {
+  border-collapse: separate;
+  width: 100%;
+  max-width: 70%;
+}
+
+.tabela_reduzida tr,
+.tabela_reduzida th,
+.tabela_reduzida td {
+  border: 1px solid black;
+}
+
+
 tr,
 th,
 td {
+
   padding: 6px;
   text-align: center;
   border-bottom: 1px solid #bebec9;
