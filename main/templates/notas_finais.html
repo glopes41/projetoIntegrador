@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+Médias
+{% endblock titulo%}
+
+{% block conteudo %}
+{% if data %}
+<img src="{% static 'img/logo_unicamp.jpg' %}" alt="Minha Imagem">
+<table class="tabela_classificacao_final">
+    <thead>
+        <tr>
+            <th colspan="6" class="titulo_principal">Notas Finais</th>
+        </tr>
+        <tr>
+            <th class="titulo_colorido">Candidato</th>
+            {% for examinador in lista %}
+            <th class="titulo_colorido">{{ examinador }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for candidato, examinador in data.items %}
+        <tr>
+            <td class="titulo_colorido">{{ candidato }}</td>
+            {% for nome, nota in examinador.items %}
+            <td>{{ nota }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<h2>Não há médias.</h2>
+{% endif %}
+{% endblock conteudo %}

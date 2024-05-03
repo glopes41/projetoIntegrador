@@ -49,12 +49,12 @@ urlpatterns = [
          CadastroConcursoUpdate.as_view(), name='concurso_update'),
     path("delete-concurso/<int:pk>",
          CadastroConcursoDelete.as_view(), name="concurso_delete"),
-    path('medias-list', ConsultaMediasCandidatos.as_view(), name='medias_list'),
+    path('notas-finais', ConsultaMediasCandidatos.as_view(), name='notas_finais'),
     path('habilitados-list', VerificaHabilitadosList.as_view(),
          name='habilitados_list'),
     path('classificacao-list', OrdenaMediasExaminador.as_view(),
          name='classificacao_list'),
     path('empate', VerificaEmpateCandidatos.as_view(), name='empate'),
-    path('classificaocao-final-list', ClassificacaoFinalList.as_view(),
-         name='classificacao_final_list')
+    path('classificacao-final', ClassificacaoFinalList.as_view(),
+         name='classificacao_final')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

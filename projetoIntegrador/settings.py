@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'projetoIntegrador.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db_FEEC.sqlite3',
+        'NAME': BASE_DIR / 'db_CBMEG.sqlite3',
     }
 }
 
@@ -119,6 +119,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# Caminho para arquivos estáticos coletados em produção
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Lista de diretórios onde o Django deve procurar por arquivos estáticos
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 STATIC_URL = '/static/'
 
 # Default primary key field type

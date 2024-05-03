@@ -138,7 +138,7 @@ class CadastroConcursoDelete(DeleteView):
 
 
 class ConsultaMediasCandidatos(ListView):
-    template_name = 'medias_list.html'
+    template_name = 'notas_finais.html'
     context_object_name = 'media'
 
     def get_queryset(self):
@@ -166,6 +166,27 @@ class ConsultaMediasCandidatos(ListView):
         for linha in queryset:
             print(linha.candidato, linha.examinador, linha.media)
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        consulta = self.get_queryset()
+        data = {}  # Dicionário para organizar os dados
+        lista = []
+        for linha in consulta:
+            examinador = linha.examinador
+            candidato = linha.candidato
+            nota = linha.media
+            if examinador not in lista:
+                lista.append(examinador)
+            if candidato not in data:
+                data[candidato] = {}  # Inicializa a lista para o examinador
+            # Adiciona o candidato e a nota à lista do examinador
+            if examinador not in data[candidato]:
+                data[candidato][examinador] = nota
+        print(data)
+        context['data'] = data
+        context['lista'] = lista
+        return context
 
 
 # Ordena candidatos por examinador
@@ -207,7 +228,7 @@ class OrdenaMediasExaminador(ListView):
         resultados = defaultdict(dict)
         for row in queryset:
             resultados[row.examinador][row.candidato] = row.media
-
+        print("resultado: ", resultados)
         # Salvamos o dicionario ordenado por medias em arquivo na pasta local
         with open('primeira_ordenacao.json', 'w') as json_file:
             json.dump(resultados, json_file, indent=4)
@@ -366,7 +387,7 @@ class VerificaEmpateCandidatos(TemplateView):
 
 
 class ClassificacaoFinalList(ListView):
-    template_name = 'classificacao_final_list.html'
+    template_name = 'classificacao_final.html'
     model = Candidato
     num_habilitados = 0
     candidatos_habilitados = []

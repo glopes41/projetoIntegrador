@@ -82,6 +82,15 @@ html {
   color: black;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -89,15 +98,15 @@ table {
   margin: auto;
 }
 
-.tabela_reduzida {
+.tabela_classificacao_final {
   border-collapse: separate;
   width: 100%;
   max-width: 70%;
 }
 
-.tabela_reduzida tr,
-.tabela_reduzida th,
-.tabela_reduzida td {
+.tabela_classificacao_final tr,
+.tabela_classificacao_final th,
+.tabela_classificacao_final td {
   border: 1px solid black;
 }
 

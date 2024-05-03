@@ -1,14 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block titulo %}
 Lista Classificação Final
 {% endblock titulo%}
 
 {% block conteudo %}
-<table class="tabela_reduzida">
-    <caption>
-        <h3>UNICAMP</h3>
-    </caption>
+<img src="{% static 'img/logo_unicamp.jpg' %}" alt="Minha Imagem">
+<table class="tabela_classificacao_final">
     <thead>
         <tr>
             <th colspan="3" class="titulo_principal">Classificação Final</th>
