@@ -252,6 +252,9 @@ class VerificaEmpateCandidatos(TemplateView):
     dados = defaultdict()
 
     def __init__(self):
+        medias = OrdenaMediasExaminador()
+        medias.get_queryset()
+
         # Carrega os candidatos ordenados por media de um arquivo na pasta local
         with open('primeira_ordenacao.json', 'r') as json_file:
             self.dados = json.load(json_file)

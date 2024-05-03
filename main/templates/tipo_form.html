@@ -17,9 +17,7 @@ Novo Tipo de Prova
 
 <form method="POST">
     {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
+    {{ form.as_p }}
     <button type="submit" class="botao_confirmar">Confirmar</button>
     <a href="{% url 'tipo_list' %}" class="botao_confirmar">Cancelar</a>
 </form>

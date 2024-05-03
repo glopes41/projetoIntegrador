@@ -14,16 +14,16 @@ Médias
             <th colspan="6" class="titulo_principal">Notas Finais</th>
         </tr>
         <tr>
-            <th class="titulo_colorido">Candidato</th>
+            <th class="titulo_secundario">Candidato</th>
             {% for examinador in lista %}
-            <th class="titulo_colorido">{{ examinador }}</th>
+            <th class="titulo_secundario">{{ examinador }}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
         {% for candidato, examinador in data.items %}
         <tr>
-            <td class="titulo_colorido">{{ candidato }}</td>
+            <td class="titulo_secundario">{{ candidato }}</td>
             {% for nome, nota in examinador.items %}
             <td>{{ nota }}</td>
             {% endfor %}

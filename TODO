@@ -1,6 +1,11 @@
-* Caluclo da media ponderada por prova e examinador - OK
+* Calculo da media ponderada por prova e examinador - OK
 * Verificar candidatos habilitados, 3 medias maiores que 7 - OK
 * Ordenar candidatos por examinador - OK
-* Verificar se para algum examinador existem notas iguais - PARCIAL
-* Perguntar ao usuario como ordenar os candidatos - PENDENTE
-* Ordenar os candidatos conforme escolha do usuario - PENDENTE
+* Verificar se para algum examinador existem notas iguais - OK
+* Perguntar ao usuario como ordenar os candidatos - OK
+* Ordenar os candidatos conforme escolha do usuario - OK
+* Migrar banco de dados para MySQL ou Postgres
+* Ajuste de telas
+* Criação de cadastro de usuarios que usarao o servidor
+* Telas de login com senha
+* Colocar o servidor em producao
