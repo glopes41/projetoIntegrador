@@ -6,9 +6,14 @@ html {
   height: 100%;
 }
 
+.titulo {
+  text-align: center;
+}
+
 .container {
   min-height: 100%;
   position: relative;
+  padding-bottom: 100px;
 }
 
 .content {
@@ -21,6 +26,7 @@ html {
   padding: 14px 16px;
   font-size: 12px;
   position: absolute;
+  bottom: 0;
   width: 100%;
   flex-shrink: 0;
   height: 100px;
@@ -66,20 +72,24 @@ html {
   color: black;
 }
 
-.tabela {
+table {
   border-collapse: collapse;
   width: 100%;
+  max-width: 100%;
+  margin: auto;
 }
 
-.tabela th,
-tr {
+tr,
+th,
+td {
   padding: 6px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #bebec9;
 }
 
-.tabela tr:hover {
+tr:hover {
   background-color: #e2e2e2;
+  text-align: center;
 }
 
 .navbar {

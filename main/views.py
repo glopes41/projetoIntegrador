@@ -5,6 +5,7 @@ from .forms import FormAvaliacao
 from collections import defaultdict
 from django.shortcuts import render
 import json
+from django.utils import timezone
 
 
 class CandidatoListView(ListView):
@@ -382,17 +383,24 @@ class ClassificacaoFinalList(ListView):
 
         self.dicionario_ordenado = {chave: list(valores.keys())
                                     for chave, valores in ordenados.items()}
-        self.calcula_classificacao_final()
+        # print(self.calcula_classificacao_final())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['dados'] = self.calcula_classificacao_final()
+        context['timestamp'] = int(timezone.now().timestamp())
+        print(context)
+
+        return context
 
     def calcula_classificacao_final(self):
         acumulador = 0
         empate_com_duas_indicacoes = []
         classificacao_final = {}
 
-        print("num_habilitados: ", self.num_habilitados)
         for posicao in range(self.num_habilitados):
             for candidato in self.candidatos_habilitados:
-                print(self.dicionario_ordenado)
                 for chave, valores in self.dicionario_ordenado.items():
                     if candidato == valores[0]:
                         acumulador += 1
@@ -533,6 +541,8 @@ class ClassificacaoFinalList(ListView):
         for lugar, (candidato, indicacoes) in enumerate(classificacao_final.items(), start=1):
             print(
                 f"{candidato} foi habilitado(a), em {lugar}º lugar, com {indicacoes} indicações.")
+
+        return classificacao_final
 
 
 class VerificaHabilitadosList(ListView):

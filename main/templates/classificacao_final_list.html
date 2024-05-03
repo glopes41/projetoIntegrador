@@ -5,5 +5,23 @@ Lista Classificação Final
 {% endblock titulo%}
 
 {% block conteudo %}
-
+<h3>Classificação Final</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Posição</th>
+            <th>Candidato</th>
+            <th>Indicações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for candidato, posicao in dados.items %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ candidato }}</td>
+            <td>{{ posicao }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock conteudo %}
